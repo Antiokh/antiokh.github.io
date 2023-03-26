@@ -1,9 +1,5 @@
-<!DOCTYPE html>
 <html lang="en" data-lt-installed="true"><head>
   <meta charset="UTF-8">
-  
-  
-  <title>CodePen - VampireGPT</title>
   <title>VampTech - IT Services for the Undead</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.cdnfonts.com/css/rune-slasher" rel="stylesheet">
@@ -30,33 +26,37 @@ footer {
   position: relative;
 }
 
-::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 10px;
 }
 
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px #000;
-  background: #111111;
-  border-radius: 0px;
+body::-webkit-scrollbar-track {
+  background: linear-gradient(
+    180deg,
+    rgba(33, 37, 41, 1) 0%,
+    rgba(33, 37, 41, 1) 10%,
+    rgb(187 45 59) 12%,
+    rgb(187 45 59) 85%,
+    rgba(33, 37, 41, 1) 90%,
+    rgba(33, 37, 41, 1) 100%
+  );
 }
 
-::-webkit-scrollbar-track:hover {
-  -webkit-box-shadow: inset 0 0 2px #000;
-  background: #212529;
-  border-radius: 0px;
+body::-webkit-scrollbar-track:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(33, 37, 41, 1) 0%,
+    rgba(33, 37, 41, 1) 10%,
+    rgba(220, 53, 69, 1) 12%,
+    rgba(220, 53, 69, 1) 85%,
+    rgba(33, 37, 41, 1) 90%,
+    rgba(33, 37, 41, 1) 100%
+  );
 }
 
-::-webkit-scrollbar-thumb {
-  border-radius: 3px;
-  -webkit-box-shadow: inset 0 0 5px #dc3545ee;
-  transition: ease 1s;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  border-radius: 3px;
-  background: #dc3545ee;
-  -webkit-box-shadow: inset 0 0 6px #000000;
-  transition: ease 1s;
+body::-webkit-scrollbar-thumb {
+  background: transparent; /* opacity: 0; should do the thing either */
+  box-shadow: 0px 0px 0px 100000vh black;
 }
 
 section:before {
@@ -294,6 +294,157 @@ canvas {
     box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
   }
 }
+
+div.drop,
+div.wave {
+  margin: 175px auto;
+}
+
+.bloodmess {
+  position: absolute;
+  margin-top: 4px;
+  margin-left: -258px;
+  opacity: 50%;
+  pointer-events: none;
+  width: 600px;
+  height: 320px;
+  overflow: visible;
+}
+
+.drop {
+  position: relative;
+  width: 20px;
+  opacity: 0;
+  height: 20px;
+  top: -30px;
+  margin: 0 auto;
+  background: rgb(187 45 59);
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  -moz-animation-name: drip, empty;
+  -webkit-animation-name: drip, empty;
+  animation-name: drip, empty;
+  -moz-animation-timing-function: cubic-bezier(1, 0, 0.91, 0.19), linear;
+  -webkit-animation-timing-function: cubic-bezier(1, 0, 0.91, 0.19), linear;
+  animation-timing-function: cubic-bezier(1, 0, 0.91, 0.19), linear;
+  -moz-animation-duration: 2s, 1s;
+  -webkit-animation-duration: 2s, 1s;
+  animation-duration: 2s, 1s;
+  -moz-animation-delay: 60s, 0s;
+  -webkit-animation-delay: 60s, 0s;
+  animation-delay: 60s, 0s;
+  -moz-animation-iteration-count: 13, 1;
+  -webkit-animation-iteration-count: 13, 1;
+  animation-iteration-count: 13, 1;
+}
+
+.drop:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 30px solid rgb(187 45 59);
+  top: -22px;
+}
+
+.wave {
+  position: relative;
+  opacity: 0;
+  top: 0;
+  width: 2px;
+  height: 1px;
+  border: rgb(187 45 59) 7px solid;
+  -moz-border-radius: 300px / 150px;
+  -webkit-border-radius: 300px / 150px;
+  border-radius: 300px / 150px;
+  -moz-animation-name: ripple;
+  -webkit-animation-name: ripple;
+  animation-name: ripple;
+  -moz-animation-delay: 62s;
+  -webkit-animation-delay: 62s;
+  animation-delay: 62s;
+  -moz-animation-duration: 2s;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -moz-animation-iteration-count: 13;
+  -webkit-animation-iteration-count: 13;
+  animation-iteration-count: 13;
+}
+
+.wave:after {
+  content: "";
+  position: absolute;
+  opacity: 0;
+  top: -5px;
+  left: -5px;
+  width: 2px;
+  height: 1px;
+  border: rgb(187 45 59) 5px solid;
+  -moz-border-radius: 300px / 150px;
+  -webkit-border-radius: 300px / 150px;
+  border-radius: 300px / 150px;
+  -moz-animation-name: ripple-2;
+  -webkit-animation-name: ripple-2;
+  animation-name: ripple-2;
+  -moz-animation-duration: 2s;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -moz-animation-iteration-count: 13;
+  -webkit-animation-iteration-count: 13;
+  animation-iteration-count: 13;
+}
+
+@keyframes ripple {
+  from {
+    opacity: 1;
+  }
+  to {
+    width: 600px;
+    height: 300px;
+    border-width: 1px;
+    top: -100px;
+    opacity: 0;
+  }
+}
+
+@keyframes ripple-2 {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    width: 200px;
+    height: 100px;
+    border-width: 1px;
+    top: 100px;
+    left: 200px;
+  }
+}
+
+@keyframes drip {
+  from {
+    opacity: 0.666;
+    transform: scale(66%);
+  }
+  to {
+    top: 190px;
+    opacity: 1;
+  }
+}
+
+@keyframes empty {
+  from {
+    /*opacity: 0;*/
+  }
+  to {
+    /*opacity: 0;*/
+  }
+}
 </style>
 
   
@@ -311,11 +462,16 @@ canvas {
   <canvas id="matrix" draggable="false" width="868" height="714"></canvas>
 <div class="box blur"></div>
 <!--<div class="box blur"></div> -->
+
 <nav draggable="false" class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="#">
       <div id="lottieContainer">
         <lottie-player id="tenthLottie" src="https://assets10.lottiefiles.com/private_files/lf30_j3lhn3en.json" background="transparent"></lottie-player>
+      </div>
+      <div class="bloodmess">
+        <div class="drop"></div>
+        <div class="wave"></div>
       </div><svg viewBox="0 0 186.48282 39.893127" preserveAspectRatio="xMidYMid" class="css-1uxicuq" id="bdcbbcge" width="186.48282" height="39.893127" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
         <defs id="SvgjsDefs1037"></defs>
         <g id="g1357" transform="matrix(0.49866412,0,0,0.49866412,-3.9770508e-6,-2.0939941e-6)">
@@ -337,6 +493,7 @@ canvas {
           </g>
         </g>
       </svg>
+
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
