@@ -1,5 +1,9 @@
+<!DOCTYPE html>
 <html lang="en" data-lt-installed="true"><head>
   <meta charset="UTF-8">
+  
+  
+  <title>CodePen - VampireGPT</title>
   <title>VampTech - IT Services for the Undead</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.cdnfonts.com/css/rune-slasher" rel="stylesheet">
@@ -219,6 +223,11 @@ canvas {
 .btn {
   margin-left: auto;
   margin-right: auto;
+  margin-top: 10px;
+}
+
+#whychoose li {
+  padding-top:10px;
 }
 
 .btn:hover {
@@ -445,6 +454,18 @@ div.wave {
     /*opacity: 0;*/
   }
 }
+
+.reveal {
+  position: relative;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: 1s all ease;
+}
+
+.reveal.active {
+  transform: translateY(0);
+  opacity: 1;
+}
 </style>
 
   
@@ -564,7 +585,7 @@ div.wave {
         </div>
       </div>
       <div class="col-md-4 mb-4 d-flex align-items-stretch">
-        <div class="card bg-dark text-light text-center">
+        <div class="card bg-dark text-light text-center reveal">
           <div class="card-body d-flex flex-column">
             <h2 class="card-title">Cybersecurity</h2>
             <p class="card-text">Protect your business and your assets with our comprehensive cybersecurity solutions.</p>
@@ -576,22 +597,22 @@ div.wave {
   </div>
 </section>
 
-<section draggable="false" class="bg-darktrans text-light py-5">
+<section draggable="false" class="bg-darktrans text-light py-5 reveal" id="whychoose">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
         <h2 class="text-center">Why Choose VampTech?</h2>
         <hr class="hr-light">
         <ul>
-          <li>Immortal Expertise: Our team of experienced and knowledgeable IT professionals has been around for centuries, and we've seen it all. Whether it's battling the latest cybersecurity threats or implementing cutting-edge technologies, we have the expertise to get the job done right.</li>
+          <li class="reveal">Immortal Expertise: Our team of experienced and knowledgeable IT professionals has been around for centuries, and we've seen it all. Whether it's battling the latest cybersecurity threats or implementing cutting-edge technologies, we have the expertise to get the job done right.</li>
 
-          <li>Fang-tastic Customization: At VampTech, we understand that every business is unique. That's why we offer customized IT solutions that are tailored to meet your specific needs. No cookie-cutter solutions here – we'll sink our teeth into your IT challenges and come up with a plan that's right for you.</li>
+          <li class="reveal">Fang-tastic Customization: At VampTech, we understand that every business is unique. That's why we offer customized IT solutions that are tailored to meet your specific needs. No cookie-cutter solutions here – we'll sink our teeth into your IT challenges and come up with a plan that's right for you.</li>
 
-          <li>Unbeatable Security: We take data security seriously – after all, we've been keeping our own secrets for centuries. We use advanced security measures to protect your data from all manner of threats, from human hackers to supernatural creatures.</li>
+          <li class="reveal">Unbeatable Security: We take data security seriously – after all, we've been keeping our own secrets for centuries. We use advanced security measures to protect your data from all manner of threats, from human hackers to supernatural creatures.</li>
 
-          <li>Eternal Reliability: Our services are designed to keep your IT systems running smoothly, day and night. We use the latest technologies and best practices to minimize downtime and ensure that your business is always up and running.</li>
+          <li class="reveal">Eternal Reliability: Our services are designed to keep your IT systems running smoothly, day and night. We use the latest technologies and best practices to minimize downtime and ensure that your business is always up and running.</li>
 
-          <li>Bite-Sized Cost-Effectiveness: We believe that everyone should have access to high-quality IT services, no matter their budget. That's why we offer cost-effective solutions that won't drain your wallet – think of it as a vampire feeding on a budget.</li>
+          <li class="reveal">Bite-Sized Cost-Effectiveness: We believe that everyone should have access to high-quality IT services, no matter their budget. That's why we offer cost-effective solutions that won't drain your wallet – think of it as a vampire feeding on a budget.</li>
         </ul>
       </div>
       <div class="col-md-5">
@@ -601,7 +622,7 @@ div.wave {
   </div>
 </section>
 
-<section draggable="false" class="testimonials bg-darktrans text-light py-5" id="testimonials">
+<section draggable="false" class="testimonials bg-darktrans text-light py-5 reveal" id="testimonials">
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
@@ -640,27 +661,27 @@ div.wave {
   </div>
 </section>
 
-<section draggable="false" class="py-5 bg-darktrans text-light" id="aboutus">
+<section draggable="false" class="py-5 bg-darktrans text-light reveal" id="aboutus">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
         <h2 class="text-center">About VampTech</h2>
         <hr class="hr-light">
-        <p>Founded in 1876 by Count Dracula himself, VampTech has been providing high-quality IT services to the undead community for over a century.
+        <p class="reveal">Founded in 1876 by Count Dracula himself, VampTech has been providing high-quality IT services to the undead community for over a century.
         </p>
-        <p>
+        <p class="reveal">
           We offer the most cutting-edge IT development, consulting, and infrastructure services to help you succeed in the modern business world. Our team of experienced vampires will work tirelessly to ensure that your technology needs are met with the highest quality and efficiency. Don't let your competitors sink their teeth into your success - partner with Vampire IT Solutions today!
         </p>
 
-        <p>The team at VampTech is made up of highly skilled IT professionals who are passionate about technology and committed to providing exceptional service. Many of our team members have been with the company for years, and we take great pride in our low turnover rate.</p>
+        <p class="reveal">The team at VampTech is made up of highly skilled IT professionals who are passionate about technology and committed to providing exceptional service. Many of our team members have been with the company for years, and we take great pride in our low turnover rate.</p>
 
-        <p>Our team includes experts in a wide range of IT disciplines, including cybersecurity, cloud infrastructure, and IT consulting. Each team member brings their unique skills and expertise to the table, allowing us to offer customized solutions that meet the specific needs of each client.</p>
+        <p class="reveal">Our team includes experts in a wide range of IT disciplines, including cybersecurity, cloud infrastructure, and IT consulting. Each team member brings their unique skills and expertise to the table, allowing us to offer customized solutions that meet the specific needs of each client.</p>
 
-        <p>We believe in ongoing training and education, and our team members regularly attend conferences and training sessions to stay up-to-date on the latest technology trends and best practices. This commitment to ongoing learning allows us to provide our clients with cutting-edge solutions that help them stay ahead of the curve.</p>
+        <p class="reveal">We believe in ongoing training and education, and our team members regularly attend conferences and training sessions to stay up-to-date on the latest technology trends and best practices. This commitment to ongoing learning allows us to provide our clients with cutting-edge solutions that help them stay ahead of the curve.</p>
 
-        <p>At VampTech, we also believe in a fun and collaborative work environment. We encourage open communication and foster a culture of innovation and creativity. We believe that a happy and engaged team is a productive team, and we work hard to create a workplace where our team members can thrive.</p>
+        <p class="reveal">At VampTech, we also believe in a fun and collaborative work environment. We encourage open communication and foster a culture of innovation and creativity. We believe that a happy and engaged team is a productive team, and we work hard to create a workplace where our team members can thrive.</p>
 
-        <p>Overall, our team at VampTech is dedicated to providing exceptional service and helping our clients to achieve their IT goals. We take pride in our work and are committed to delivering the highest quality solutions to our clients.</p>
+        <p class="reveal">Overall, our team at VampTech is dedicated to providing exceptional service and helping our clients to achieve their IT goals. We take pride in our work and are committed to delivering the highest quality solutions to our clients.</p>
         <a href="#contact" class="btn btn-danger center-mobile">Invite Us</a>
       </div>
       <div class="col-md-6">
@@ -841,6 +862,24 @@ LottieInteractivity.create({
     }
   ]
 });
+
+function reveal() {
+  var reveals = document.querySelectorAll(".reveal");
+
+  for (var i = 0; i < reveals.length; i++) {
+    var windowHeight = window.innerHeight;
+    var elementTop = reveals[i].getBoundingClientRect().top;
+    var elementVisible = 150;
+
+    if (elementTop < windowHeight - elementVisible) {
+      reveals[i].classList.add("active");
+    } else {
+      reveals[i].classList.remove("active");
+    }
+  }
+}
+
+window.addEventListener("scroll", reveal);
     </script>
 
   
