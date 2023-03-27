@@ -18,6 +18,8 @@
 <!-- MDB -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet">
 <script src="https://unpkg.com/@lottiefiles/lottie-interactivity@latest/dist/lottie-interactivity.min.js"></script>
+
+		<script src="matrixrain.js"></script>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
   
@@ -790,7 +792,6 @@ class Effect {
     this.columns = this.canvasWidth / this.fontSize;
     this.symbols = [];
     this.#initialize();
-    console.log(this.symbols);
   }
   #initialize() {
     for (let i = 0; i < this.columns; i++) {
@@ -807,8 +808,8 @@ class Effect {
 }
 var effect = new Effect(canvas.width, canvas.height);
 let lastTime = 0;
-const fps = 20;
-const nextFrame = 1000 / fps;
+var fps = 20;
+var nextFrame = 1000 / fps;
 let timer = 0;
 
 function animate(timeStamp) {
@@ -829,13 +830,36 @@ function animate(timeStamp) {
   requestAnimationFrame(animate);
 }
 
+var matrixRain;
+
 //Load the font
 font.load().then(
   () => {
     // Resolved - add font to document.fonts
 
     // Start the animation
-    animate(0);
+    //animate(0);
+	
+   // console.log(font);
+	
+	matrixRain = new MatrixRain(
+	element = document.getElementById("matrix"),
+	width = window.innerWidth,
+	height = window.innerHeight,
+	charList = [
+		'0','1','2','3','4','5','6','7','8','9',
+		'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+		'+','-','*','=','<','>',':','.',
+		'ﾊ','ﾐ','ﾋ','ｰ','ｳ','ｼ','ﾅ','ﾓ','ﾆ','ｻ','ﾜ','ﾂ','ｵ','ﾘ','ｱ','ﾎ','ﾃ','ﾏ','ｹ','ﾒ','ｴ','ｶ','ｷ','ﾑ','ﾕ','ﾗ','ｾ','ﾈ','ｽ','ﾀ','ﾇ','ﾍ'
+	],
+	red = 255, green = 0, blue = 0,
+	randomColors = false,
+	flowRate = 1,
+	fps = 15,
+	font
+	);
+	
+	
   },
   (err) => {
     console.log("err");
@@ -843,12 +867,13 @@ font.load().then(
   }
 );
 
+/*
 window.addEventListener("resize", function () {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   effect = new Effect(canvas.width, canvas.height);
   console.log("resize");
-});
+}); */
 
 LottieInteractivity.create({
   mode: "cursor",
@@ -884,6 +909,14 @@ function reveal() {
 }
 
 window.addEventListener("scroll", reveal);
+
+
+
+
+window.addEventListener("resize", () => {
+	matrixRain.setCanvasDimensions(window.innerWidth, window.innerHeight);
+});
+
     </script>
 
   

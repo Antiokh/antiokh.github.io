@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Matrix Digital Rain Effect Example</title>
+		<style>
+			* {
+				margin: 0;
+				overflow: hidden;
+			}
+		</style>
+		<script src="matrixrain.js"></script>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script>
+			const matrixRain = new MatrixRain(
+				element = document.getElementById("canvas"),
+				width = window.innerWidth,
+				height = window.innerHeight,
+				charList = [
+					'0','1','2','3','4','5','6','7','8','9',
+					'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+					'+','-','*','=','<','>',':','.',
+					'ﾊ','ﾐ','ﾋ','ｰ','ｳ','ｼ','ﾅ','ﾓ','ﾆ','ｻ','ﾜ','ﾂ','ｵ','ﾘ','ｱ','ﾎ','ﾃ','ﾏ','ｹ','ﾒ','ｴ','ｶ','ｷ','ﾑ','ﾕ','ﾗ','ｾ','ﾈ','ｽ','ﾀ','ﾇ','ﾍ'
+				],
+				red = 255, green = 0, blue = 0,
+				randomColors = false,
+				flowRate = 1,
+				fps = 15,
+			);
+			window.addEventListener("resize", () => {
+				matrixRain.setCanvasDimensions(window.innerWidth, window.innerHeight);
+			});
+		</script>
+		<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46156385-1', 'cssscript.com');
+  ga('send', 'pageview');
+
+</script>
+	</body>
+</html>
