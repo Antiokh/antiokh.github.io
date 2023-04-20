@@ -1,0 +1,427 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  
+  
+  <title>Beli-Karton</title>
+  
+  
+  
+  
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+}
+p {
+  color: black;
+  font-family: "Times New Roman", serif;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 8pt;
+  margin: 0pt;
+  text-indent: 0pt;
+  text-align: left;
+}
+.s1 {
+  color: black;
+  font-family: "Times New Roman", serif;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 12pt;
+}
+.s2 {
+  color: black;
+  font-family: "Times New Roman", serif;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 8pt;
+  padding-top: 3pt;
+  padding-left: 3pt;
+  text-indent: 0pt;
+  text-align: left;
+  display: block;
+}
+.s3,
+.s4,
+.s5 {
+  color: black;
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 12pt;
+  padding-top: 7pt;
+  padding-left: 5pt;
+  text-indent: 0pt;
+  text-align: left;
+  padding-bottom: 6px;
+  padding-right: 6px;
+}
+
+table,
+tbody {
+  vertical-align: top;
+  overflow: visible;
+}
+td {
+  border-top-style: solid;
+  border-top-width: 1pt;
+  border-left-style: solid;
+  border-left-width: 1pt;
+  border-bottom-style: solid;
+  border-bottom-width: 1pt;
+  border-right-style: solid;
+  border-right-width: 1pt;
+  border-collapse: collapse;
+}
+
+table tr td {
+  vertical-align: middle;
+}
+
+table tr td:last-child p {
+  vertical-align: middle;
+}
+
+table.mainform tr td:first-child {
+  width: 32% !important;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  vertical-align: middle;
+}
+
+table.mainform tr td:last-child {
+  width: 68% !important;
+  vertical-align: middle;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.select-crossing,
+.select-sex {
+  margin-left: auto;
+  display: inline-block;
+  float: right;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  border: solid 1px DDD;
+}
+
+@media print {
+  .noprint,
+  .noprint * {
+    display: none !important;
+  }
+}
+
+select {
+  padding: 3px;
+  font-size: 10pt;
+  width: 120px;
+}
+</style>
+
+  
+  
+  
+</head>
+
+<body>
+  <html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+  <div style="width:728px; margin: auto;
+  padding-top: 100pt;">
+    <div>
+      <div style="display:inline-block; width:50%">visarun.rs</div>
+      <div style="display:inline-block; width:49%; margin-left:auto;">
+        <p class="s1" style="padding-top: 4pt;text-indent: 0pt;text-align: right;">Образац 1.</p>
+      </div>
+    </div>
+
+    <div style="border: dashed 1px; padding: 7px">
+
+      <div style="width:100%">
+        <div style="display: inline-block; width:140px; background: none;"></div>
+        <div style="margin:auto; display: inline-block; width: 400px; background: none;">
+          <p class="s2" style="text-indent: 0pt;line-height: 9pt;text-align: center;">REGISTRATION OF PLACE OF STAY</p>
+          <p class="s2" style="padding-left: 2pt;text-indent: 0pt;line-height: 8pt;text-align: center;">ПРИЈАВА БОРАВИШТА СТРАНЦА</p>
+
+        </div>
+        <div style="display: inline-block; width:140px; background: none;">
+          <p class="s2" style="text-indent: 0pt;line-height: 8pt;text-align: left;">Серијски број/Serial number:</p>
+        </div>
+      </div>
+
+      <p>
+        <br />
+      </p>
+
+      <table style="border-collapse:collapse; width: 100%" cellspacing="0">
+        <tr style="height:26pt">
+          <td style="width:93pt;">
+            <p class="s2">Презиме - Surname</p>
+          </td>
+          <td style="width:334pt;">
+            <p class="s3" contenteditable="true" id="lastname">Familiya</p>
+          </td>
+        </tr>
+        <tr style="height:26pt">
+          <td style="width:93pt; border-bottom: none;">
+            <p class="s2">Име - Name</p>
+          </td>
+          <td style="width:334pt; border-bottom: none;">
+            <p contenteditable="true" class="s4" id="name">Imya</p>
+          </td>
+        </tr>
+      </table>
+      <table class="mainform" style="border-collapse:collapse; width: 100%" cellspacing="0">
+        <tr style="height:26pt">
+          <td style="width:171pt;" colspan="2">
+            <p class="s2">Датум рођења</p>
+            <p class="s2">Date of birth</p>
+          </td>
+          <td style="width:100%">
+            <p contenteditable="true" class="s4" id="birthdate">01.01.2001.</p>
+          </td>
+        </tr>
+        <tr style="height:26pt">
+          <td style="width:171pt;" colspan="2">
+            <p class="s2">Пол</p>
+            <p class="s2">Sex</p>
+          </td>
+          <td style="">
+            <p><span class="s4" style="width: 100px" contenteditable="true" id="sex">M/Ž</span><select class="noprint select-sex" id="select-sex">
+                <option value=""></option>
+                <option value="M">Мужской</option>
+                <option value="Ž">Женский</option>
+              </select></p>
+          </td>
+        </tr>
+        <tr style="height:26pt">
+          <td style="width:171pt;" colspan="2">
+            <p class="s2">Место и држава рођења</p>
+            <p class="s2">Place and country of birth</p>
+          </td>
+          <td style="">
+            <p contenteditable="true" class="s4" id="birthplace">Rusija</p>
+          </td>
+        </tr>
+        <tr style="height:26pt">
+          <td style="width:171pt;" colspan="2">
+            <p class="s2">Држављанство</p>
+            <p class="s2">Nationality</p>
+          </td>
+          <td style="">
+            <p contenteditable="true" class="s4" id="citizenship">Rusko</p>
+          </td>
+        </tr>
+        <tr style="height:36pt">
+          <td style="width:171pt;" colspan="2">
+            <p class="s2">Врста и број путне или друге исправе о идентитету</p>
+            <p class="s2">Type and number of travel document or other ID</p>
+          </td>
+          <td style="">
+            <p contenteditable="true" class="s4" id="passport">PI-76 1234567</p>
+          </td>
+        </tr>
+        <tr style="height:35pt">
+          <td style="width:171pt;" colspan="2">
+            <p class="s2">Врста и број визе и место издавања</p>
+            <p class="s2">Type and number of visa and place of issuance</p>
+          </td>
+          <td style="">
+            <p contenteditable="true" class="s5">
+            </p>
+          </td>
+        </tr>
+        <tr style="height:26pt">
+          <td style="width:171pt;" colspan="2">
+            <p class="s2">Датум и место уласка у Републику Србију</p>
+            <p class="s2">Date and place of entry into the Republic of Serbia</p>
+          </td>
+          <td style="">
+            <p class="">
+              <span contenteditable="true" class="s4" id="entrance-date">01.01.2001.</span>
+              <span contenteditable="true" class="s4" id="entrance-place">Badovinci</span><select class="noprint select-crossing" id="border-crossing">
+                <option>Badovinci</option>
+                <option>Banatski Brestovac</option>
+                <option>Bačka Palanka</option>
+                <option>Bačka Petrovac</option>
+                <option>Bački Vinogradi</option>
+                <option>Bajmok</option>
+                <option>Bezdan</option>
+                <option>Bogovadja</option>
+                <option>Bolevec</option>
+                <option>Border Crossing Point Priboj</option>
+                <option>Bosilegrad</option>
+                <option>Brodarevo</option>
+                <option>Bratunac</option>
+                <option>Budimpešta</option>
+                <option>Dimitrovgrad</option>
+                <option>Djala</option>
+                <option>Dobrinci</option>
+                <option>Gostun</option>
+                <option>Granični prelaz Đeneral Janković</option>
+                <option>Granični prelaz Novi Sad</option>
+                <option>Granični prelaz Thermopile</option>
+                <option>Ključ</option>
+                <option>Kopaonik</option>
+                <option>Kosjerić</option>
+                <option>Kosovo Polje</option>
+                <option>Sremska Raća</option>
+                <option>Surčin</option>
+                <option>Vrnjci</option>
+                <option>Vatin</option>
+                <option>Vlaole</option>
+                <option>Žabljak</option>
+                <option>Zagubica</option>
+                <option>Zaječar</option>
+                <option>Zrenjanin</option>
+              </select>
+            </p>
+          </td>
+        </tr>
+        <tr style="height:45pt">
+          <td style="width:171pt;" colspan="2">
+            <p class="s2">Адреса боравишта у Републици Србији</p>
+            <p class="s2">Аddress of place of stay in the Republic of Serbia</p>
+          </td>
+          <td style="">
+            <p contenteditable="true" class="s3" id="residence-address">GO Voždovac, Bulevar JNA 10</p>
+          </td>
+        </tr>
+        <tr style="height:63pt">
+          <td style="width:171pt;" colspan="2">
+            <p class="s2">Податак о станодавцу (презиме и име и ЈМБГ, односно назив правног лица или предузетника и ПИБ)</p>
+            <p class="s2">Surname, given name and personal identification number of the landlord/host ie, name of legal entity or entrepreneur and tax ID number).</p>
+          </td>
+          <td style="">
+            <p contenteditable="true" class="s3" id="residence-owner">Vučić Vuk</p>
+            <p contenteditable="true" class="s3" id="residence-id">JMBG0123456789012</p>
+          </td>
+        </tr>
+        <tr style="height:26pt">
+          <td style="width:171pt;" colspan="2">
+            <p class="s2">Датум пријаве</p>
+            <p class="s2">Date of registration</p>
+          </td>
+          <td style="">
+            <p contenteditable="true" class="s3" id="current-date">01.01.2001.</p>
+          </td>
+        </tr>
+        <tr style="height:26pt">
+          <td style="width:171pt;" colspan="2">
+            <p class="s2">Напомена</p>
+            <p class="s2">Note</p>
+          </td>
+          <td style="">
+            <p contenteditable="true" id="note" class="s3 noprint">
+            </p>
+          </td>
+        </tr>
+        <tr style="height:36pt">
+          <td style="width:171pt;" colspan="2">
+            <p class="s2" style="padding-top: 3pt;padding-left: 3pt;text-indent: 0pt;text-align: left;">Потпис подносиоца пријаве</p>
+            <p>
+              <br />
+            </p>
+            <p class="s2" style="padding-left: 3pt;text-indent: 0pt;text-align: left;">Signature of the person who registers</p>
+          </td>
+          <td style="">
+            <p>
+              <br />
+            </p>
+          </td>
+        </tr>
+        <tr style="height:52pt">
+          <td style="width:171pt;" colspan="2">
+            <p>
+              <br />
+            </p>
+          </td>
+          <td style="">
+            <p>
+              <br />
+            </p>
+            <p class="s2" style="padding-left: 25pt;text-indent: 0pt;text-align: left;">(потпис овлашћеног лица - signature of the authorized person)</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>
+  
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js'></script>
+      <script id="rendered-js" >
+// A $( document ).ready() block.
+$(document).ready(function () {
+  console.log("ready!");
+  $("#current-date").text(new Date().toString("dd.MM.yyyy."));
+  $("#entrance-date").text(new Date().toString("dd.MM.yyyy."));
+
+  var texdate = $("#entrance-date").text();
+  var newdate = new Date().add(30).days().toString("dd.MM.yyyy.");
+  $("#note").text("Крайняя дата пребывания: " + newdate);
+
+  $("#border-crossing").change(function () {
+    // Получаем выбранное значение
+    var selectedValue = $(this).val();
+    // Устанавливаем выбранное значение в элемент с идентификатором #test
+    $("#entrance-place").text(selectedValue);
+  });
+
+  $("#select-sex").change(function () {
+    // Получаем выбранное значение
+    var selectedValue = $(this).val();
+    // Устанавливаем выбранное значение в элемент с идентификатором #test
+    $("#sex").text(selectedValue);
+  });
+
+  document.getElementById("entrance-date").addEventListener(
+    "input",
+    function () {
+      var texdate = $("#entrance-date").text();
+      var newdate = Date.parseExact(texdate, "dd.MM.yyyy.")
+        .add(30)
+        .days()
+        .toString("dd.MM.yyyy.");
+      $("#note").text("Крайняя дата пребывания: " + newdate);
+    },
+    false
+  );
+
+  // Get URL parameters
+  var urlParams = new URLSearchParams(window.location.search);
+
+  // Loop through each parameter name
+  urlParams.forEach(function (value, key) {
+    // Check if there's an element with the corresponding ID
+    var element = $("#" + key);
+    if (element.length > 0) {
+      // Set the value of the element
+      element.text(value);
+    }
+  });
+});
+    </script>
+
+  
+</body>
+
+</html>
