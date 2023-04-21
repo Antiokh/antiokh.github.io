@@ -207,7 +207,7 @@ select {
   font-style: normal;
   font-weight: normal;
   text-decoration: none;
-  font-size: 12pt;
+  font-size: 10pt;
   margin-top: 10pt;
   text-align: center;
 }
@@ -220,236 +220,232 @@ select {
 
 <body>
   <div style="width:728px; margin: auto;
-  height:50pt;">
-    <h1 style="text-align:center" class="noprint">Visarun.rs: автоматическое создание белого картона для прибывших в Сербию после визарана.</h1>
+  height:40pt;">
+  <h1 style="text-align:center" class="noprint">Visarun.rs: автоматическое создание белого картона для прибывших в Сербию после визарана.</h1>
 
-    <p id="yourlink" class="s2 hidden noprint">Ваша ссылка на заполненную страницу:
-      <input class="noprint hidden" style="width:300px" type="text" id="link">
+  <p id="yourlink" class="hidden noprint">Ваша ссылка на заполненную страницу:
+    <input class="noprint hidden" style="width:300px" type="text" id="link">
 
+</div>
+<div style="width:728px; margin: auto;">
+  <div>
+    <div id="copy-link-btn" style="cursor:pointer;display:inline-block; width:75%" title="Нажмите чтобы скопировать ссылку с данными">visarun.rs<span class="hint noprint"> ← нажми чтобы скопировать ссылку</span></div>
+    <div style="display:inline-block; width:24%; margin-left:auto;">
+      <p class="s1" style="padding-top: 4pt;text-indent: 0pt;text-align: right;">Образац 1.</p>
+    </div>
   </div>
-  <div style="width:728px; margin: auto;">
-    <div>
-      <div id="copy-link-btn" style="cursor:pointer;display:inline-block; width:75%" title="Нажмите чтобы скопировать ссылку с данными">visarun.rs<span class="hint noprint"> ← нажми чтобы скопировать ссылку</span></div>
-      <div style="display:inline-block; width:24%; margin-left:auto;">
-        <p class="s1" style="padding-top: 4pt;text-indent: 0pt;text-align: right;">Образац 1.</p>
+
+  <div style="border: dashed 1px; padding: 7px">
+
+    <div style="width:100%">
+      <div style="display: inline-block; width:140px; background: none;"></div>
+      <div style="margin:auto; display: inline-block; width: 400px; background: none;">
+        <p class="s2" style="text-indent: 0pt;line-height: 9pt;text-align: center;">REGISTRATION OF PLACE OF STAY</p>
+        <p class="s2" style="padding-left: 2pt;text-indent: 0pt;line-height: 8pt;text-align: center;">ПРИЈАВА БОРАВИШТА СТРАНЦА</p>
+
+      </div>
+      <div style="display: inline-block; width:140px; background: none; vertical-align:bottom; padding-bottom: 5px;">
+        <p class="s2" style="text-indent: 0pt;line-height: 8pt;text-align: left;">Серијски број/Serial number:</p>
       </div>
     </div>
 
-    <div style="border: dashed 1px; padding: 7px">
+    <table style="border-collapse:collapse; width: 100%" cellspacing="0">
+      <tr style="height:26pt">
+        <td style="width:93pt;">
+          <p class="s2">Презиме - Surname</p>
+        </td>
+        <td style="width:334pt;">
+          <p class="s3" contenteditable="true" id="lastname">Familiya ← Фамилия из загранпаспорта</p>
+        </td>
+      </tr>
+      <tr style="height:26pt">
+        <td style="width:93pt; border-bottom: none;">
+          <p class="s2">Име - Name</p>
+        </td>
+        <td style="width:334pt; border-bottom: none;">
+          <p contenteditable="true" class="s4" id="name">Imya ← Имя из загранпаспорта</p>
+        </td>
+      </tr>
+    </table>
+    <table class="mainform" style="border-collapse:collapse; width: 100%" cellspacing="0">
+      <tr style="height:26pt">
+        <td style="width:171pt;" colspan="2">
+          <p class="s2">Датум рођења</p>
+          <p class="s2">Date of birth</p>
+        </td>
+        <td style="width:100%">
+          <input type="text" class="datepicker" id="birthdatepicker" style="display:none;">
+          <p contenteditable="true" class="s4" id="birthdate">01.01.2001.      ← Дата рождения, можно выбрать →</p> <span class="noprint open-datepicker" id="open-birthdatepicker"><i class="fas fa-calendar"></i></span>
+        </td>
+      </tr>
+      <tr style="height:26pt">
+        <td style="width:171pt;" colspan="2">
+          <p class="s2">Пол</p>
+          <p class="s2">Sex</p>
+        </td>
+        <td style="">
+          <p><span class="s4" style="width: 100px" contenteditable="true" id="sex">M/Ž</span><select class="noprint select-sex" id="select-sex">
+              <option value="">Выбрать...</option>
+              <option value="M">Мужской</option>
+              <option value="Ž">Женский</option>
+            </select></p>
+        </td>
+      </tr>
+      <tr style="height:26pt">
+        <td style="width:171pt;" colspan="2">
+          <p class="s2">Место и држава рођења</p>
+          <p class="s2">Place and country of birth</p>
+        </td>
+        <td style="">
+          <p contenteditable="true" class="s4" id="birthplace">Rusija</p>
+        </td>
+      </tr>
+      <tr style="height:26pt">
+        <td style="width:171pt;" colspan="2">
+          <p class="s2">Држављанство</p>
+          <p class="s2">Nationality</p>
+        </td>
+        <td style="">
+          <p contenteditable="true" class="s4" id="citizenship">Rusko</p>
+        </td>
+      </tr>
+      <tr style="height:36pt">
+        <td style="width:171pt;" colspan="2">
+          <p class="s2">Врста и број путне или друге исправе о идентитету</p>
+          <p class="s2">Type and number of travel document or other ID</p>
+        </td>
+        <td style="">
+          <p contenteditable="true" class="s4" id="passport">PI-76 1234567 ← Введите номер загранпаспорта (PI)</p>
+        </td>
+      </tr>
+      <tr style="height:35pt">
+        <td style="width:171pt;" colspan="2">
+          <p class="s2">Врста и број визе и место издавања</p>
+          <p class="s2">Type and number of visa and place of issuance</p>
+        </td>
+        <td style="">
+          <p contenteditable="true" class="s5">
+          </p>
+        </td>
+      </tr>
+      <tr style="height:26pt">
+        <td style="width:171pt;" colspan="2">
+          <p class="s2">Датум и место уласка у Републику Србију</p>
+          <p class="s2">Date and place of entry into the Republic of Serbia</p>
+        </td>
+        <td style="">
+          <p class=""><input type="text" class="datepicker" id="entrancedatepicker" style="display:none;">
+            <span contenteditable="true" class="s4" id="entrance-date">01.01.2001.</span>
+            <span class="noprint open-datepicker" id="open-entrancedatepicker"><i class="fas fa-calendar"></i></span>
 
-      <div style="width:100%">
-        <div style="display: inline-block; width:140px; background: none;"></div>
-        <div style="margin:auto; display: inline-block; width: 400px; background: none;">
-          <p class="s2" style="text-indent: 0pt;line-height: 9pt;text-align: center;">REGISTRATION OF PLACE OF STAY</p>
-          <p class="s2" style="padding-left: 2pt;text-indent: 0pt;line-height: 8pt;text-align: center;">ПРИЈАВА БОРАВИШТА СТРАНЦА</p>
-
-        </div>
-        <div style="display: inline-block; width:140px; background: none;">
-          <p class="s2" style="text-indent: 0pt;line-height: 8pt;text-align: left;">Серијски број/Serial number:</p>
-        </div>
-      </div>
-
-      <p>
-        <br />
-      </p>
-
-      <table style="border-collapse:collapse; width: 100%" cellspacing="0">
-        <tr style="height:26pt">
-          <td style="width:93pt;">
-            <p class="s2">Презиме - Surname</p>
-          </td>
-          <td style="width:334pt;">
-            <p class="s3" contenteditable="true" id="lastname">Familiya ← Фамилия из загранпаспорта</p>
-          </td>
-        </tr>
-        <tr style="height:26pt">
-          <td style="width:93pt; border-bottom: none;">
-            <p class="s2">Име - Name</p>
-          </td>
-          <td style="width:334pt; border-bottom: none;">
-            <p contenteditable="true" class="s4" id="name">Imya ← Имя из загранпаспорта</p>
-          </td>
-        </tr>
-      </table>
-      <table class="mainform" style="border-collapse:collapse; width: 100%" cellspacing="0">
-        <tr style="height:26pt">
-          <td style="width:171pt;" colspan="2">
-            <p class="s2">Датум рођења</p>
-            <p class="s2">Date of birth</p>
-          </td>
-          <td style="width:100%">
-            <input type="text" class="datepicker" id="birthdatepicker" style="display:none;">
-            <p contenteditable="true" class="s4" id="birthdate">01.01.2001.      ← Дата рождения, можно выбрать →</p> <span class="noprint open-datepicker" id="open-birthdatepicker"><i class="fas fa-calendar"></i></span>
-          </td>
-        </tr>
-        <tr style="height:26pt">
-          <td style="width:171pt;" colspan="2">
-            <p class="s2">Пол</p>
-            <p class="s2">Sex</p>
-          </td>
-          <td style="">
-            <p><span class="s4" style="width: 100px" contenteditable="true" id="sex">M/Ž</span><select class="noprint select-sex" id="select-sex">
-                <option value="">Выбрать...</option>
-                <option value="M">Мужской</option>
-                <option value="Ž">Женский</option>
-              </select></p>
-          </td>
-        </tr>
-        <tr style="height:26pt">
-          <td style="width:171pt;" colspan="2">
-            <p class="s2">Место и држава рођења</p>
-            <p class="s2">Place and country of birth</p>
-          </td>
-          <td style="">
-            <p contenteditable="true" class="s4" id="birthplace">Rusija</p>
-          </td>
-        </tr>
-        <tr style="height:26pt">
-          <td style="width:171pt;" colspan="2">
-            <p class="s2">Држављанство</p>
-            <p class="s2">Nationality</p>
-          </td>
-          <td style="">
-            <p contenteditable="true" class="s4" id="citizenship">Rusko</p>
-          </td>
-        </tr>
-        <tr style="height:36pt">
-          <td style="width:171pt;" colspan="2">
-            <p class="s2">Врста и број путне или друге исправе о идентитету</p>
-            <p class="s2">Type and number of travel document or other ID</p>
-          </td>
-          <td style="">
-            <p contenteditable="true" class="s4" id="passport">PI-76 1234567 ← Введите номер загранпаспорта (PI)</p>
-          </td>
-        </tr>
-        <tr style="height:35pt">
-          <td style="width:171pt;" colspan="2">
-            <p class="s2">Врста и број визе и место издавања</p>
-            <p class="s2">Type and number of visa and place of issuance</p>
-          </td>
-          <td style="">
-            <p contenteditable="true" class="s5">
-            </p>
-          </td>
-        </tr>
-        <tr style="height:26pt">
-          <td style="width:171pt;" colspan="2">
-            <p class="s2">Датум и место уласка у Републику Србију</p>
-            <p class="s2">Date and place of entry into the Republic of Serbia</p>
-          </td>
-          <td style="">
-            <p class=""><input type="text" class="datepicker" id="entrancedatepicker" style="display:none;">
-              <span contenteditable="true" class="s4" id="entrance-date">01.01.2001.</span>
-              <span class="noprint open-datepicker" id="open-entrancedatepicker"><i class="fas fa-calendar"></i></span>
-
-              <span contenteditable="true" class="s4" id="entrance-place">Badovinci</span><select class="noprint select-crossing" id="border-crossing">
-                <option value="">Выбрать...</option>
-                <option>Badovinci</option>
-                <option>Banatski Brestovac</option>
-                <option>Bačka Palanka</option>
-                <option>Bačka Petrovac</option>
-                <option>Bački Vinogradi</option>
-                <option>Bajmok</option>
-                <option>Bezdan</option>
-                <option>Bogovadja</option>
-                <option>Bolevec</option>
-                <option>Bosilegrad</option>
-                <option>Brodarevo</option>
-                <option>Bratunac</option>
-                <option>Budimpešta</option>
-                <option>Dimitrovgrad</option>
-                <option>Djala</option>
-                <option>Dobrinci</option>
-                <option>Đeneral Janković</option>
-                <option>Gostun</option>
-                <option>Ključ</option>
-                <option>Kopaonik</option>
-                <option>Kosjerić</option>
-                <option>Kosovo Polje</option>
-                <option>Novi Sad</option>
-                <option>Priboj</option>
-                <option>Sremska Raća</option>
-                <option>Surčin</option>
-                <option>Thermopile</option>
-                <option>Vrnjci</option>
-                <option>Vatin</option>
-                <option>Vlaole</option>
-                <option>Žabljak</option>
-                <option>Zagubica</option>
-                <option>Zaječar</option>
-                <option>Zrenjanin</option>
-              </select>
-            </p>
-          </td>
-        </tr>
-        <tr style="height:45pt">
-          <td style="width:171pt;" colspan="2">
-            <p class="s2">Адреса боравишта у Републици Србији</p>
-            <p class="s2">Аddress of place of stay in the Republic of Serbia</p>
-          </td>
-          <td style="">
-            <p contenteditable="true" class="s3" id="residence-address">GO Voždovac, Bulevar JNA 10 ← Введите адрес регистрации</p>
-          </td>
-        </tr>
-        <tr style="height:63pt">
-          <td style="width:171pt;" colspan="2">
-            <p class="s2">Податак о станодавцу (презиме и име и ЈМБГ, односно назив правног лица или предузетника и ПИБ)</p>
-            <p class="s2">Surname, given name and personal identification number of the landlord/host ie, name of legal entity or entrepreneur and tax ID number).</p>
-          </td>
-          <td style="">
-            <p contenteditable="true" class="s3" id="residence-owner">Vučić Vuk ← Введите фамилию и имя хозяина</p>
-            <p contenteditable="true" class="s3" id="residence-id">JMBG0123456789012 ← Введите данные хозяина</p>
-          </td>
-        </tr>
-        <tr style="height:26pt">
-          <td style="width:171pt;" colspan="2">
-            <p class="s2">Датум пријаве</p>
-            <p class="s2">Date of registration</p>
-          </td>
-          <td style="">
-            <p contenteditable="true" class="s3" id="current-date">01.01.2001.</p>
-          </td>
-        </tr>
-        <tr style="height:26pt">
-          <td style="width:171pt;" colspan="2">
-            <p class="s2">Напомена</p>
-            <p class="s2">Note</p>
-          </td>
-          <td style="">
-            <p contenteditable="true" id="note" class="s3 noprint">
-            </p>
-          </td>
-        </tr>
-        <tr style="height:36pt">
-          <td style="width:171pt;" colspan="2">
-            <p class="s2" style="padding-top: 3pt;padding-left: 3pt;text-indent: 0pt;text-align: left;">Потпис подносиоца пријаве</p>
-            <p>
-              <br />
-            </p>
-            <p class="s2" style="padding-left: 3pt;text-indent: 0pt;text-align: left;">Signature of the person who registers</p>
-          </td>
-          <td style="">
-            <p>
-              <br />
-            </p>
-          </td>
-        </tr>
-        <tr style="height:52pt">
-          <td style="width:171pt;" colspan="2">
-            <p>
-              <br />
-            </p>
-          </td>
-          <td style="">
-            <p>
-              <br />
-            </p>
-            <p class="s2" style="padding-left: 25pt;text-indent: 0pt;text-align: left;">(потпис овлашћеног лица - signature of the authorized person)</p>
-          </td>
-        </tr>
-      </table>
-    </div>
+            <span contenteditable="true" class="s4" id="entrance-place">Badovinci</span><select class="noprint select-crossing" id="border-crossing">
+              <option value="">Выбрать...</option>
+              <option>Badovinci</option>
+              <option>Banatski Brestovac</option>
+              <option>Bačka Palanka</option>
+              <option>Bačka Petrovac</option>
+              <option>Bački Vinogradi</option>
+              <option>Bajmok</option>
+              <option>Bezdan</option>
+              <option>Bogovadja</option>
+              <option>Bolevec</option>
+              <option>Bosilegrad</option>
+              <option>Brodarevo</option>
+              <option>Bratunac</option>
+              <option>Budimpešta</option>
+              <option>Dimitrovgrad</option>
+              <option>Djala</option>
+              <option>Dobrinci</option>
+              <option>Đeneral Janković</option>
+              <option>Gostun</option>
+              <option>Ključ</option>
+              <option>Kopaonik</option>
+              <option>Kosjerić</option>
+              <option>Kosovo Polje</option>
+              <option>Novi Sad</option>
+              <option>Priboj</option>
+              <option>Sremska Raća</option>
+              <option>Surčin</option>
+              <option>Thermopile</option>
+              <option>Vrnjci</option>
+              <option>Vatin</option>
+              <option>Vlaole</option>
+              <option>Žabljak</option>
+              <option>Zagubica</option>
+              <option>Zaječar</option>
+              <option>Zrenjanin</option>
+            </select>
+          </p>
+        </td>
+      </tr>
+      <tr style="height:45pt">
+        <td style="width:171pt;" colspan="2">
+          <p class="s2">Адреса боравишта у Републици Србији</p>
+          <p class="s2">Аddress of place of stay in the Republic of Serbia</p>
+        </td>
+        <td style="">
+          <p contenteditable="true" class="s3" id="residence-address">GO Voždovac, Bulevar JNA 10 ← Введите адрес регистрации</p>
+        </td>
+      </tr>
+      <tr style="height:63pt">
+        <td style="width:171pt;" colspan="2">
+          <p class="s2">Податак о станодавцу (презиме и име и ЈМБГ, односно назив правног лица или предузетника и ПИБ)</p>
+          <p class="s2">Surname, given name and personal identification number of the landlord/host ie, name of legal entity or entrepreneur and tax ID number).</p>
+        </td>
+        <td style="">
+          <p contenteditable="true" class="s3" id="residence-owner">Vučić Vuk ← Введите фамилию и имя хозяина</p>
+          <p contenteditable="true" class="s3" id="residence-id">JMBG0123456789012 ← Введите данные хозяина</p>
+        </td>
+      </tr>
+      <tr style="height:26pt">
+        <td style="width:171pt;" colspan="2">
+          <p class="s2">Датум пријаве</p>
+          <p class="s2">Date of registration</p>
+        </td>
+        <td style="">
+          <p contenteditable="true" class="s3" id="current-date">01.01.2001.</p>
+        </td>
+      </tr>
+      <tr style="height:26pt">
+        <td style="width:171pt;" colspan="2">
+          <p class="s2">Напомена</p>
+          <p class="s2">Note</p>
+        </td>
+        <td style="">
+          <p contenteditable="true" id="note" class="s3 noprint">
+          </p>
+        </td>
+      </tr>
+      <tr style="height:36pt">
+        <td style="width:171pt;" colspan="2">
+          <p class="s2" style="padding-top: 3pt;padding-left: 3pt;text-indent: 0pt;text-align: left;">Потпис подносиоца пријаве</p>
+          <p>
+            <br />
+          </p>
+          <p class="s2" style="padding-left: 3pt;text-indent: 0pt;text-align: left;">Signature of the person who registers</p>
+        </td>
+        <td style="">
+          <p>
+            <br />
+          </p>
+        </td>
+      </tr>
+      <tr style="height:52pt">
+        <td style="width:171pt;" colspan="2">
+          <p>
+            <br />
+          </p>
+        </td>
+        <td style="">
+          <p>
+            <br />
+          </p>
+          <p class="s2" style="padding-left: 25pt;text-indent: 0pt;text-align: left;">(потпис овлашћеног лица - signature of the authorized person)</p>
+        </td>
+      </tr>
+    </table>
   </div>
+</div>
   
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js'></script>
@@ -463,7 +459,7 @@ $(document).ready(function () {
   $("#entrance-date").text(new Date().toString("dd.MM.yyyy."));
 
   var texdate = $("#entrance-date").text();
-  var newdate = new Date().add(30).days().toString("dd.MM.yyyy.");
+  var newdate = new Date().add(29).days().toString("dd.MM.yyyy.");
   $("#note").text("Крайняя дата пребывания: " + newdate);
 
   $("#border-crossing").change(function () {
@@ -506,7 +502,16 @@ $(document).ready(function () {
     }
   });
 
+  // Get today's date
+  var currentDate = new Date();
+  // Set minDate to 1930
+  var minDate = new Date(1930, 0, 1);
+  // Set maxDate to today
+  var maxDate = currentDate;
+
   $("#birthdatepicker").datepicker({
+    minDate: minDate,
+    maxDate: maxDate,
     changeMonth: true, // Enable month selection
     changeYear: true, // Enable year selection
     dateFormat: "dd.mm.yy.", // set date format
