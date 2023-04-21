@@ -148,6 +148,11 @@ table.mainform tr td:last-child {
   .noprint * {
     display: none !important;
   }
+  
+  .transparent {
+  filter: opacity(0);
+  transition: ease 1s;
+}
 }
 
 select {
@@ -198,6 +203,7 @@ select {
 
 .hidden {
   display: none !important;
+  transition: ease 1s;
 }
 
 #yourlink {
@@ -210,6 +216,7 @@ select {
   margin-top: 10pt;
   text-align: center;
 }
+
 </style>
 
   
@@ -228,7 +235,7 @@ select {
 </div>
 <div style="width:728px; margin: auto;">
   <div>
-    <div class="noprint" id="copy-link-btn" style="cursor:pointer;display:inline-block; width:75%" title="Нажмите чтобы скопировать ссылку с данными">💾<span class="hint noprint"> ← нажми чтобы скопировать ссылку</span></div>
+    <div class="transparent" id="copy-link-btn" style="cursor:pointer;display:inline-block; width:75%" title="Нажмите чтобы скопировать ссылку с данными">—<span class="hint noprint"> ← нажми чтобы скопировать ссылку</span></div>
     <div style="display:inline-block; width:24%; margin-left:auto;">
       <p class="s1" style="padding-top: 4pt;text-indent: 0pt;text-align: right;">Образац 1.</p>
     </div>
