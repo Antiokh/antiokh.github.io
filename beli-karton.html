@@ -39,6 +39,10 @@ p {
   font-size: 12pt;
 }
 .s2 {
+  display: block;
+}
+.hint,
+.s2 {
   color: black;
   font-family: "Times New Roman", serif;
   font-style: normal;
@@ -49,7 +53,6 @@ p {
   padding-left: 3pt;
   text-indent: 0pt;
   text-align: left;
-  display: block;
 }
 .s3,
 .s4,
@@ -175,6 +178,10 @@ select {
 .datepicker {
   margin-top: 32px;
 }
+
+.hidden {
+  display: none !important;
+}
 </style>
 
   
@@ -191,11 +198,16 @@ select {
 
 <body>
   <div style="width:728px; margin: auto;
-  height:50pt;"></div>
+  height:50pt;">
+
+    <p class="s2 hidden noprint">Ваша ссылка на заполненную страницу:
+      <input class="noprint hidden" style="width:300px" type="text" id="link">
+
+  </div>
   <div style="width:728px; margin: auto;">
     <div>
-      <div id="copylink" style="display:inline-block; width:50%">visarun.rs</div>
-      <div style="display:inline-block; width:49%; margin-left:auto;">
+      <div id="copy-link-btn" style="cursor:pointer;display:inline-block; width:75%" title="Нажмите чтобы скопировать ссылку с данными">visarun.rs<span class="hint noprint"> ← нажми чтобы скопировать ссылку</span></div>
+      <div style="display:inline-block; width:24%; margin-left:auto;">
         <p class="s1" style="padding-top: 4pt;text-indent: 0pt;text-align: right;">Образац 1.</p>
       </div>
     </div>
@@ -497,7 +509,76 @@ $(document).ready(function () {
   $("#open-entrancedatepicker").on("click", function () {
     $("#entrancedatepicker").datepicker("show");
   });
+
+  // Add click event to copy link button
+  $("#copy-link-btn").on("click", function () {
+    // Get the current URL
+    var currentUrl = window.location.href;
+
+    // Create an empty object to store the parameter-value pairs
+    var parameters = {};
+
+    // Loop through each editable element with an ID
+    $('*[contenteditable="true"]').each(function () {
+      // Get the element's ID and text content
+      var id = $(this).attr("id");
+      var value = $(this).text().trim();
+
+      // If the element has an ID and a non-empty value, add it to the parameters object
+      if (id && value !== "") {
+        parameters[id] = value;
+      }
+    });
+
+    // Check if there are existing parameters in the current URL
+    var separator = currentUrl.indexOf("?") === -1 ? "?" : "&";
+
+    // Append the parameters to the current URL with the appropriate separator
+    var newUrl = currentUrl + separator + $.param(parameters);
+
+    shortenUrl(newUrl, function (shortenedUrl) {
+      // Use the shortened URL in your code
+      console.log("Shortened URL:", shortenedUrl);
+      // Update the href of the link to the new URL
+      $("#link").val(shortenedUrl);
+      // Find all elements with the "hidden" class and remove it
+      $(".hidden").removeClass("hidden");
+
+      // Copy link to clipboard
+      var tempTextArea = $("<textarea>");
+      tempTextArea.val(shortenedUrl);
+      $("body").append(tempTextArea);
+      tempTextArea.select();
+      document.execCommand("copy");
+      tempTextArea.remove();
+      alert("Ссылка скопирована!");
+    });
+  });
 });
+
+// Function to shorten the URL using TinyURL
+function shortenUrl(longUrl, callback) {
+  var apiUrl = "https://tinyurl.com/api-create.php";
+
+  // Construct the API request URL
+  var requestUrl = apiUrl + "?url=" + encodeURIComponent(longUrl);
+
+  // Send a GET request to the API
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.text();
+    })
+    .then(function (data) {
+      // Extract the shortened URL from the API response
+      var shortenedUrl = data.trim();
+
+      // Call the callback function with the shortened URL
+      callback(shortenedUrl);
+    })
+    .catch(function (error) {
+      console.error("Error shortening URL:", error);
+    });
+}
     </script>
 
   
