@@ -8,8 +8,12 @@
   
   <title>Beli-Karton</title>
   
+   
   
-  
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://releases.jquery.com/undefined/ui/1.13.2/themes/base/jquery-ui.css'>
+<link rel='stylesheet' href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'>
   
 <style>
 * {
@@ -91,18 +95,24 @@ table tr td:last-child p {
   vertical-align: middle;
 }
 
+table tr td:last-child span {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+table tr td:last-child {
+  vertical-align: middle;
+  padding: 2px;
+}
+
 table.mainform tr td:first-child {
   width: 32% !important;
   padding-top: 3px;
   padding-bottom: 3px;
-  vertical-align: middle;
 }
 
 table.mainform tr td:last-child {
   width: 68% !important;
-  vertical-align: middle;
-  padding-left: 2px;
-  padding-right: 2px;
 }
 
 .select-crossing,
@@ -124,8 +134,35 @@ table.mainform tr td:last-child {
 
 select {
   padding: 3px;
-  font-size: 10pt;
+  margin-top: 3px;
+  margin-bottom: 0px;
+  font-size: 12pt;
   width: 120px;
+  height: 34px;
+  display: block;
+  vertical-align: bottom;
+  position: relative;
+  float: right;
+}
+
+#copylink {
+  cursor: pointer;
+}
+
+#open-birthdatepicker {
+  display: block;
+  float: right;
+  margin-top: -32px;
+  margin-right: 5px;
+}
+
+#open-entrancedatepicker {
+  /* hmm */
+}
+
+#birthdatepicker,
+.datepicker {
+  margin-top: 32px;
 }
 </style>
 
@@ -143,9 +180,10 @@ select {
 
 <body>
   <div style="width:728px; margin: auto;
-  padding-top: 100pt;">
+  height:50pt;"></div>
+  <div style="width:728px; margin: auto;">
     <div>
-      <div style="display:inline-block; width:50%">visarun.rs</div>
+      <div id="copylink" style="display:inline-block; width:50%">visarun.rs</div>
       <div style="display:inline-block; width:49%; margin-left:auto;">
         <p class="s1" style="padding-top: 4pt;text-indent: 0pt;text-align: right;">Образац 1.</p>
       </div>
@@ -175,7 +213,7 @@ select {
             <p class="s2">Презиме - Surname</p>
           </td>
           <td style="width:334pt;">
-            <p class="s3" contenteditable="true" id="lastname">Familiya</p>
+            <p class="s3" contenteditable="true" id="lastname">Familiya ← Фамилия из загранпаспорта</p>
           </td>
         </tr>
         <tr style="height:26pt">
@@ -183,7 +221,7 @@ select {
             <p class="s2">Име - Name</p>
           </td>
           <td style="width:334pt; border-bottom: none;">
-            <p contenteditable="true" class="s4" id="name">Imya</p>
+            <p contenteditable="true" class="s4" id="name">Imya ← Имя из загранпаспорта</p>
           </td>
         </tr>
       </table>
@@ -194,7 +232,8 @@ select {
             <p class="s2">Date of birth</p>
           </td>
           <td style="width:100%">
-            <p contenteditable="true" class="s4" id="birthdate">01.01.2001.</p>
+            <input type="text" class="datepicker" id="birthdatepicker" style="display:none;">
+            <p contenteditable="true" class="s4" id="birthdate">01.01.2001.      ← Дата рождения, можно выбрать →</p> <span class="noprint open-datepicker" id="open-birthdatepicker"><i class="fas fa-calendar"></i></span>
           </td>
         </tr>
         <tr style="height:26pt">
@@ -204,7 +243,7 @@ select {
           </td>
           <td style="">
             <p><span class="s4" style="width: 100px" contenteditable="true" id="sex">M/Ž</span><select class="noprint select-sex" id="select-sex">
-                <option value=""></option>
+                <option value="">Выбрать...</option>
                 <option value="M">Мужской</option>
                 <option value="Ž">Женский</option>
               </select></p>
@@ -234,7 +273,7 @@ select {
             <p class="s2">Type and number of travel document or other ID</p>
           </td>
           <td style="">
-            <p contenteditable="true" class="s4" id="passport">PI-76 1234567</p>
+            <p contenteditable="true" class="s4" id="passport">PI-76 1234567 ← Введите номер загранпаспорта (PI)</p>
           </td>
         </tr>
         <tr style="height:35pt">
@@ -253,9 +292,12 @@ select {
             <p class="s2">Date and place of entry into the Republic of Serbia</p>
           </td>
           <td style="">
-            <p class="">
+            <p class=""><input type="text" class="datepicker" id="entrancedatepicker" style="display:none;">
               <span contenteditable="true" class="s4" id="entrance-date">01.01.2001.</span>
+              <span class="noprint open-datepicker" id="open-entrancedatepicker"><i class="fas fa-calendar"></i></span>
+
               <span contenteditable="true" class="s4" id="entrance-place">Badovinci</span><select class="noprint select-crossing" id="border-crossing">
+                <option value="">Выбрать...</option>
                 <option>Badovinci</option>
                 <option>Banatski Brestovac</option>
                 <option>Bačka Palanka</option>
@@ -300,7 +342,7 @@ select {
             <p class="s2">Аddress of place of stay in the Republic of Serbia</p>
           </td>
           <td style="">
-            <p contenteditable="true" class="s3" id="residence-address">GO Voždovac, Bulevar JNA 10</p>
+            <p contenteditable="true" class="s3" id="residence-address">GO Voždovac, Bulevar JNA 10 ← Введите адрес регистрации</p>
           </td>
         </tr>
         <tr style="height:63pt">
@@ -309,8 +351,8 @@ select {
             <p class="s2">Surname, given name and personal identification number of the landlord/host ie, name of legal entity or entrepreneur and tax ID number).</p>
           </td>
           <td style="">
-            <p contenteditable="true" class="s3" id="residence-owner">Vučić Vuk</p>
-            <p contenteditable="true" class="s3" id="residence-id">JMBG0123456789012</p>
+            <p contenteditable="true" class="s3" id="residence-owner">Vučić Vuk ← Введите фамилию и имя хозяина</p>
+            <p contenteditable="true" class="s3" id="residence-id">JMBG0123456789012 ← Введите данные хозяина</p>
           </td>
         </tr>
         <tr style="height:26pt">
@@ -368,6 +410,8 @@ select {
   
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js'></script>
       <script id="rendered-js" >
 // A $( document ).ready() block.
 $(document).ready(function () {
@@ -417,6 +461,30 @@ $(document).ready(function () {
       // Set the value of the element
       element.text(value);
     }
+  });
+
+  $("#birthdatepicker").datepicker({
+    dateFormat: "dd.mm.yy.", // set date format
+    onSelect: function (dateText, inst) {
+      $("#birthdate").text(dateText); // update span with picked date value
+    }
+  });
+
+  // Open datepicker on external button click
+  $("#open-birthdatepicker").on("click", function () {
+    $("#birthdatepicker").datepicker("show");
+  });
+
+  $("#entrancedatepicker").datepicker({
+    dateFormat: "dd.mm.yy.", // set date format
+    onSelect: function (dateText, inst) {
+      $("#entrance-date").text(dateText); // update span with picked date value
+    }
+  });
+
+  // Open datepicker on external button click
+  $("#open-entrancedatepicker").on("click", function () {
+    $("#entrancedatepicker").datepicker("show");
   });
 });
     </script>
