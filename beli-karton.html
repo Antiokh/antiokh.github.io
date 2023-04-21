@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru" >
 
@@ -394,7 +393,7 @@ select {
         </td>
         <td style="">
           <p contenteditable="true" class="s3" id="residence-owner">Vučić Vuk ← Введите фамилию и имя хозяина</p>
-          <p contenteditable="true" class="s3" id="residence-id">JMBG0123456789012 ← Введите данные хозяина</p>
+          <p contenteditable="true" class="s3" id="residence-id">JMBG0123456789012 ← Введите данные ID-карты хозяина</p>
         </td>
       </tr>
       <tr style="height:26pt">
@@ -480,8 +479,9 @@ $(document).ready(function () {
     "input",
     function () {
       var texdate = $("#entrance-date").text();
+      console.log("entrance-change: " + texdate);
       var newdate = Date.parseExact(texdate, "dd.MM.yyyy.")
-        .add(30)
+        .add(29)
         .days()
         .toString("dd.MM.yyyy.");
       $("#note").text("Крайняя дата пребывания: " + newdate);
@@ -529,6 +529,11 @@ $(document).ready(function () {
     dateFormat: "dd.mm.yy.", // set date format
     onSelect: function (dateText, inst) {
       $("#entrance-date").text(dateText); // update span with picked date value
+      var newdate = Date.parseExact(dateText, "dd.MM.yyyy.")
+        .add(29)
+        .days()
+        .toString("dd.MM.yyyy.");
+      $("#note").text("Крайняя дата пребывания: " + newdate);
     }
   });
 
