@@ -237,7 +237,7 @@ select {
   transition: ease 1s;
 }
 
-#yourlink {
+#yourlink, .dontshare {
   color: black;
   font-family: "Times New Roman", serif;
   font-style: normal;
@@ -627,9 +627,8 @@ $(document).ready(function () {
       $("#link").val(shortenedUrl);
       // Find all elements with the "hidden" class and remove it
       $(".hidden").removeClass("hidden");
-	  $("#dontshare").css("font-weight", "bold");
-	  $("#dontshare").removeClass("h2");
-	  
+	  $("#dontshare").css("font-weight", "bold").removeClass("h2").addClass("dontshare");
+	  //$("#dontshare").removeClass("h2");
 
       // Copy link to clipboard
       var tempTextArea = $("<textarea>");
