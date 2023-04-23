@@ -259,10 +259,10 @@ select {
   <div style="width:728px; margin: auto;
   min-height:40pt;">
   <h1 style="text-align:center" class="noprint">Автоматическое создание белого картона для прибывших в Сербию после визарана.</h1>
-  <h2 class="h2 noprint">Форма не собирает персональных данных и не хранит их. Cookies не используются. Эта шапка не печатается.</h2><div class="h2 noprint" id="dontshare">Не делитесь личной ссылкой, делитесь ссылкой <a href="" id="currentpage"></a></div>
-
+  <h2 class="h2 noprint">Форма не собирает персональных данных и не хранит их. Cookies не используются. Эта шапка не печатается.</h2>
   <p id="yourlink" class="hidden noprint">Ваша ссылка на заполненную страницу:
     <input class="noprint hidden" style="width:300px" type="text" id="link">
+	<p class="h2 noprint" id="dontshare">Не делитесь личной ссылкой, делитесь ссылкой <a href="" id="currentpage"></a></p>
 
 </div>
 <div style="width:728px; margin: auto;">
@@ -627,7 +627,8 @@ $(document).ready(function () {
       $("#link").val(shortenedUrl);
       // Find all elements with the "hidden" class and remove it
       $(".hidden").removeClass("hidden");
-	  $("#dontshare").css("font-weight", "bold");;
+	  $("#dontshare").css("font-weight", "bold");
+	  $("#dontshare").removeClass("h2");
 	  
 
       // Copy link to clipboard
