@@ -259,7 +259,7 @@ select {
   <div style="width:728px; margin: auto;
   min-height:40pt;">
   <h1 style="text-align:center" class="noprint">Автоматическое создание белого картона для прибывших в Сербию после визарана.</h1>
-  <h2 class="h2 noprint">Форма не собирает персональных данных и не хранит их. Cookies не используются. Эта шапка не печатается.<br/>Не делитесь личной ссылкой, делитесь ссылкой <a href="" id="currentpage"></a></h2>
+  <h2 class="h2 noprint">Форма не собирает персональных данных и не хранит их. Cookies не используются. Эта шапка не печатается.</h2><div class="h2 noprint" id="dontshare">Не делитесь личной ссылкой, делитесь ссылкой <a href="" id="currentpage"></a></div>
 
   <p id="yourlink" class="hidden noprint">Ваша ссылка на заполненную страницу:
     <input class="noprint hidden" style="width:300px" type="text" id="link">
@@ -627,6 +627,8 @@ $(document).ready(function () {
       $("#link").val(shortenedUrl);
       // Find all elements with the "hidden" class and remove it
       $(".hidden").removeClass("hidden");
+	  $("#dontshare").css("font-weight", "bold");;
+	  
 
       // Copy link to clipboard
       var tempTextArea = $("<textarea>");
