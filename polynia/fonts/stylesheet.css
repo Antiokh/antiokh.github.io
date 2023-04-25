@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Jack Brusher(RUS BY LYAJKA)';
+    src: url('hinted-JackBrusherRUSBYLYAJKA.woff2') format('woff2'),
+        url('hinted-JackBrusherRUSBYLYAJKA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
