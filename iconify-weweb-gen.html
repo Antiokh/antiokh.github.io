@@ -210,6 +210,10 @@ function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
         const selectedIconset = $(this).val();
         if (selectedIconset) {
           fetchIcons(selectedIconset);
+            // Clean generated content
+            $('#cssTextarea').val('');
+            $('#jsonTextarea').val('');
+            $('#generateForSelected').text('You can select any icon');
         }
       });
 
