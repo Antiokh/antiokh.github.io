@@ -165,8 +165,14 @@ async function generateCssAndJson(icList) {
 
 // Function to modify CSS template
 function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
+
+      // Handle doubled class names first
+  const cssWithDoubledNames = iconSetCss.replace(new RegExp(`\\.icon--${iconSetName}\\.icon--${iconSetName}--([A-Za-z0-9_-]+)(?![A-Za-z0-9_-])`, 'g'), (match, iconName) => {
+    return `.icon--${iconSetName}--${iconName}`;
+  });
+  
   // Replace class names and append your required template
-  const modifiedCss = iconSetCss
+  const modifiedCss = cssWithDoubledNames
     .replace(new RegExp(`--svg: url\\("data:image`, 'g'), 'background-image: url("data:image')
     .replace(new RegExp(`\\.icon--${iconSetName}`, 'g'), `.iconify-${iconSetName}`)
     .replace(new RegExp(`\\.icon--${iconSetName}--[A-Za-z0-9_-]+`, 'g'), match => {
