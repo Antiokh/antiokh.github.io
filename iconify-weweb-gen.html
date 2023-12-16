@@ -290,6 +290,7 @@ function extractIconsFromCSS(cssText) {
 
   // Find the common prefix based on the algorithm
   const prefix = findCommonPrefix(classNames);
+  $('#iconsetDropdown').val(prefix);
 
   if (!prefix) {
     console.error("Unable to determine a common prefix.");
