@@ -401,13 +401,10 @@ function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
       $('#convertCss').click(function() {
         const cssContent = $('#cssTextarea').val();        
 
-        // Find the most common icon prefix using the provided function
-        //const mostCommonIconPrefix = findCommonPrefix(cssContent);
-
         const iconData = extractIconsFromCSS(cssContent);
         $('#jsonTextarea').val(JSON.stringify(iconData, null, 2));
         // Log the result
-        //console.log(iconData);
+        toastr.success("Converted to WeWeb JSON!");
       });
 
 
