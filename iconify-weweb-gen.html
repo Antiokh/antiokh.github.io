@@ -105,6 +105,9 @@ function fetchIconCollections() {
       const iconsetDropdown = $('#iconsetDropdown');
       iconsetDropdown.empty();
 
+      //add empty
+      iconsetDropdown.append($('<option>').text(`Select an Iconset from the list here...`).attr('value', '').attr('selected','selected'));
+
       sortedIconsets.forEach(([key, value]) => {
         const licenseInfo = value.license ? ` (${value.license.title})` : '';
         iconsetDropdown.append($('<option>').text(`${value.name}${licenseInfo}`).attr('value', key));
