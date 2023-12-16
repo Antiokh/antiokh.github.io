@@ -57,8 +57,9 @@
     <!-- CSS and JSON Textareas -->
     <div class="mt-5">
       <label for="cssTextarea" class="form-label">Generated CSS:</label>
-      <textarea id="cssTextarea" class="form-control" rows="10" readonly></textarea>
+      <textarea id="cssTextarea" class="form-control" rows="10"></textarea>
       <button id="downloadCss" class="btn btn-primary mt-2">Download CSS</button>
+      <button id="convertCss" class="btn btn-success mt-2" style="margin-left: auto; margin-right: auto;">Convert CSS</button>
     </div>
 
     <div class="mt-4">
@@ -200,6 +201,119 @@ async function generateCssAndJson(icList) {
   }
 }
 
+function findCommonPrefix(matches) { //cssText
+  /*
+  const iconRegex = /\.([^\s,{]+)(?=\s*{)/g;
+  let matches = [];
+  let match;
+
+  while ((match = iconRegex.exec(cssText)) !== null) {
+    matches.push(match[1]);
+  }
+  */
+
+  if (!matches || matches.length === 0) {
+        return '';
+    }
+
+    // Step 1: Sort the array
+    matches.sort();
+
+    // Step 2: Find potential prefixes
+    const potentialPrefixes = [];
+
+    for (let i = 0; i < matches.length - 1; i++) {
+        const current = matches[i];
+        const next = matches[i + 1];
+        let commonPrefix = '';
+
+        for (let j = 0; j < Math.min(current.length, next.length); j++) {
+            if (current[j] === next[j]) {
+                commonPrefix += current[j];
+            } else {
+                break;
+            }
+        }
+
+        if (commonPrefix !== '' && potentialPrefixes.indexOf(commonPrefix) === -1) {
+            potentialPrefixes.push(commonPrefix);
+        }
+    }
+
+//    console.log('Potential Prefixes:', potentialPrefixes);
+
+    // Step 3: Test potential prefixes and find the most common one
+    let mostCommonPrefix = '';
+    let highestCount = 0;
+
+    for (const prefix of potentialPrefixes) {
+        const prefixCount = matches.filter(str => str.startsWith(prefix)).length;
+
+        //console.log(`Prefix: ${prefix}, Count: ${prefixCount}`);
+
+        if (prefixCount > highestCount && prefixCount > matches.length / 2) {
+            mostCommonPrefix = prefix;
+            highestCount = prefixCount;
+        }
+    }
+
+    console.log('Most common Prefix (Step 3):', mostCommonPrefix, 'Count:', highestCount);
+
+    // Step 4: Sort potential prefixes from longest to shortest
+    const sortedPrefixes = potentialPrefixes.sort((a, b) => b.length - a.length);
+
+    // Step 5: Return the first prefix that meets the criteria >50% matches
+    for (const prefix of sortedPrefixes) {
+        const prefixCount = matches.filter(str => str.startsWith(prefix)).length;
+
+        if (prefixCount > matches.length / 2) {
+            console.log('Most long and common Prefix (Step 4):', prefix, 'Count:', prefixCount);
+            return prefix;
+        }
+    }
+
+    console.log('No Common Prefix Found');
+    return '';
+
+
+}
+
+
+function extractIconsFromCSS(cssText) {
+  // Extract all class names from the CSS
+  const classNamesWithPseudoClasses = cssText.match(/\.([^\s{]+)(?=\s*{)/g) || [];
+ //   console.warn(classNamesWithPseudoClasses);
+
+  // Remove pseudo-classes from each class name
+  const classNames = classNamesWithPseudoClasses.map(className => className.replace(/:[^{]+/, ''));
+ // console.log(classNames);
+
+  // Find the common prefix based on the algorithm
+  const prefix = findCommonPrefix(classNames);
+
+  if (!prefix) {
+    console.error("Unable to determine a common prefix.");
+    return [];
+  }
+
+  const iconData = [];
+  const regex = new RegExp(`${prefix}-*(.+)\\s*{`, "g");
+  let match;
+
+  while ((match = regex.exec(cssText)) !== null) {
+ //   console.log(match);
+    const iconNameWithPseudoClass = match[1].trim();
+    const iconName = iconNameWithPseudoClass.split(':')[0]; // Remove pseudo-class
+    const className = `${prefix}${iconName}`;
+    iconData.push({ name: iconName, class: className.slice(1) }); // Remove starting dot
+  }
+
+  return iconData;
+}
+
+
+
+
 // Function to modify CSS template
 function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
 
@@ -282,6 +396,20 @@ function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
         const cssContent = $('#cssTextarea').val();
         downloadContent(cssContent, 'weweb-iconify-' + $('#iconsetDropdown').val() +'.css', 'css');
       });
+
+      // Event handler for "Convert CSS" button
+      $('#convertCss').click(function() {
+        const cssContent = $('#cssTextarea').val();        
+
+        // Find the most common icon prefix using the provided function
+        //const mostCommonIconPrefix = findCommonPrefix(cssContent);
+
+        const iconData = extractIconsFromCSS(cssContent);
+        $('#jsonTextarea').val(JSON.stringify(iconData, null, 2));
+        // Log the result
+        //console.log(iconData);
+      });
+
 
       // Event handler for "Download JSON" button
       $('#downloadJson').click(function() {
