@@ -58,7 +58,7 @@
     </div>
 
     <!-- CSS and JSON Textareas -->
-    <div class="mt-5">
+    <div class="mt-5" id="result">
       <label for="cssTextarea" class="form-label">Generated CSS:</label>
       <textarea id="cssTextarea" class="form-control" rows="10"></textarea>
       <button id="downloadCss" class="btn btn-primary mt-2">Download CSS</button>
@@ -401,6 +401,7 @@ function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
           return $(this).find('svg').data('icon').split(':')[1];
         }).get();
         generateCssAndJson(selectedIcons);
+        $('html, body').animate({ scrollTop: $('#result').offset().top }, 500);
       });
 
       // Event handler for "Generate for All" button
@@ -409,6 +410,7 @@ function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
           return $(this).data('icon');
         }).get();
         generateCssAndJson(allIcons);
+        $('html, body').animate({ scrollTop: $('#result').offset().top }, 500);
       });
 
       // Event handler for "Download CSS" button
@@ -427,6 +429,7 @@ function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
 
         const iconData = extractIconsFromCSS(cssContent);
         $('#jsonTextarea').val(JSON.stringify(iconData, null, 2));
+        $('html, body').animate({ scrollTop: $('#result').offset().top }, 500);
         // Log the result
         toastr.success("Converted to WeWeb JSON!");
       });
