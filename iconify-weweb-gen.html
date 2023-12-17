@@ -36,6 +36,9 @@
   </style>
 </head>
 <body class="bg-light">
+  <script>
+      var iconSetName = '';
+    </script>
   <div class="container my-5">
     <h1 class="text-center">Iconify Generator</h1>
 
@@ -49,7 +52,7 @@
     <div id="iconsContainer" class="d-flex flex-wrap justify-content-center"></div>
 
     <!-- Generate Buttons -->
-    <div class="mt-3">
+    <div class="mt-3" id="set-controls" style="display: none;">
         <button id="generateForAll" class="btn btn-primary">Generate for All</button>
         <button id="generateForSelected" class="btn btn-success">Generate for Selected</button>
     </div>
@@ -115,7 +118,7 @@ function fetchIconCollections() {
 
       // Fetch icons for the first iconset by default
       const defaultIconset = sortedIconsets[0][0];
-      fetchIcons(defaultIconset);
+      //fetchIcons(defaultIconset);
     },
     error: function(error) {
       console.error('Error fetching iconsets:', error);
@@ -127,12 +130,14 @@ function fetchIconCollections() {
 
       // Function to fetch icons for a selected iconset
       function fetchIcons(iconSetName) {
+        const iconsContainer = $('#iconsContainer');
+        iconsContainer.empty();
         $.ajax({
           url: `https://api.iconify.design/collection?prefix=${iconSetName}`,
           method: 'GET',
           success: function(data) {
             // Display icons in container
-            const iconsContainer = $('#iconsContainer');
+            //const iconsContainer = $('#iconsContainer');
             iconsContainer.empty();
             $.each(data.uncategorized, function(_, iconName) {
               const iconDiv = $(`<div class="m-2 p-2 text-center" style="cursor: pointer;"><i class="iconify" data-icon="${iconSetName}:${iconName}" style="font-size: 2rem;"></i><div>${iconName}</div></div>`);
@@ -147,6 +152,7 @@ function fetchIconCollections() {
                 $('#generateForSelected').text('Generate for Selected' +  (selectedIcons.length>0?' (' + selectedIcons.length + ')':''));
               });
             });
+            $('#set-controls').show();
           },
           error: function(error) {
             console.error('Error fetching icons:', error);
@@ -293,7 +299,8 @@ function extractIconsFromCSS(cssText) {
 
   // Find the common prefix based on the algorithm
   const prefix = findCommonPrefix(classNames);
-  $('#iconsetDropdown').val(prefix);
+  $('#iconsetDropdown').val('');
+  iconSetName = prefix.replace(/\./g, '').replace(/\W+/g, '-').replace(/-+$/g, '');
 
   if (!prefix) {
     console.error("Unable to determine a common prefix.");
@@ -368,7 +375,11 @@ function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
 
       // Event handler for iconset dropdown change
       $('#iconsetDropdown').change(function() {
-        const selectedIconset = $(this).val();
+        const selectedIconset = $(this).val();        
+        iconSetName = selectedIconset;
+        const iconsContainer = $('#iconsContainer');
+        iconsContainer.empty();
+        $('#set-controls').hide();
         if (selectedIconset) {
           fetchIcons(selectedIconset);
             // Clean generated content
@@ -398,7 +409,7 @@ function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
       // Event handler for "Download CSS" button
       $('#downloadCss').click(function() {
         const cssContent = $('#cssTextarea').val();
-        downloadContent(cssContent, 'weweb-iconify-' + $('#iconsetDropdown').val() +'.css', 'css');
+        downloadContent(cssContent, 'weweb-iconify-' + iconSetName +'.css', 'css');
       });
 
       // Event handler for "Convert CSS" button
@@ -415,7 +426,7 @@ function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
       // Event handler for "Download JSON" button
       $('#downloadJson').click(function() {
         const jsonContent = $('#jsonTextarea').val();
-        downloadContent(jsonContent, 'weweb-iconify-' + $('#iconsetDropdown').val() +'.json', 'json');
+        downloadContent(jsonContent, 'weweb-iconify-' + iconSetName +'.json', 'json');
       });
 
       // Initial fetch of icon collections
