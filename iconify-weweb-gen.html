@@ -163,6 +163,11 @@ function fetchIconCollections() {
 
         // Function to get icon list from collection endpoint
         async function getIconList(iconSetName) {
+          if (iconSetName == '') {
+            // Display icons in container
+            $('#iconsContainer').empty();
+            $('#set-controls').hide();
+            return null}
         try {
             const collectionUrl = `https://api.iconify.design/collection?prefix=${iconSetName}`;
             const response = await fetch(collectionUrl);
@@ -414,7 +419,11 @@ function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
 
       // Event handler for "Convert CSS" button
       $('#convertCss').click(function() {
-        const cssContent = $('#cssTextarea').val();        
+        const cssContent = $('#cssTextarea').val();  
+        
+            // Display icons in container
+            $('#iconsContainer').empty();
+            $('#set-controls').hide();      
 
         const iconData = extractIconsFromCSS(cssContent);
         $('#jsonTextarea').val(JSON.stringify(iconData, null, 2));
