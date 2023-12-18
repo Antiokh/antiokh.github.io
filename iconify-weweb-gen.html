@@ -155,8 +155,8 @@ function fetchIconCollections() {
             $('#set-controls').show();
           },
           error: function(error) {
-            console.error('Error fetching icons:', error);
             toastr.error('Error fetching icons:', error);
+            console.error('Error fetching icons:', error);
           }
         });
       }
@@ -177,12 +177,12 @@ function fetchIconCollections() {
             if (iconSetDetails.uncategorized) {
             return iconSetDetails.uncategorized;
             } else {
-            throw new Error(`Icon list not found for ${iconSetName}`);
             toastr.error(`Icon list not found for ${iconSetName}`);
+            throw new Error(`Icon list not found for ${iconSetName}`);
             }
         } catch (error) {
-            throw new Error(`Error getting icon list: ${error.message}`);
             toastr.error(`Error getting icon list: ${error.message}`);
+            throw new Error(`Error getting icon list: ${error.message}`);
         }
         }
 
@@ -211,6 +211,7 @@ async function generateCssAndJson(icList) {
     $('#jsonTextarea').val(jsonContent);
     if (modifiedCss.length>0 || jsonContent.length>0) {toastr.success('Successfully generated, check the output fields.');}
   } catch (error) {
+    toastr.error(error.message);
     console.error(error.message);
   }
 }
