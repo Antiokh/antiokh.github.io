@@ -121,7 +121,7 @@ function fetchIconCollections() {
       //fetchIcons(defaultIconset);
     },
     error: function(error) {
-      $('html, body').animate({ scrollTop: $('html').offset().top }, 500);
+      $('html, body').animate({ scrollTop: $('html').offset().top }, 200);
       toastr.error('Error fetching iconsets:', error);
       console.error('Error fetching iconsets:', error);
     }
@@ -156,7 +156,7 @@ function fetchIconCollections() {
             $('#set-controls').show();
           },
           error: function(error) {
-            $('html, body').animate({ scrollTop: $('html').offset().top }, 500);
+            $('html, body').animate({ scrollTop: $('html').offset().top }, 200);
             toastr.error('Error fetching icons:', error);
             console.error('Error fetching icons:', error);
           }
@@ -179,12 +179,12 @@ function fetchIconCollections() {
             if (iconSetDetails.uncategorized) {
             return iconSetDetails.uncategorized;
             } else {
-              $('html, body').animate({ scrollTop: $('html').offset().top }, 500);
+              $('html, body').animate({ scrollTop: $('html').offset().top }, 200);
               toastr.error(`Icon list not found for ${iconSetName}`);
               throw new Error(`Icon list not found for ${iconSetName}`);
             }
         } catch (error) {
-            $('html, body').animate({ scrollTop: $('html').offset().top }, 500); 
+            $('html, body').animate({ scrollTop: $('html').offset().top }, 200); 
             toastr.error(`Error getting icon list: ${error.message}`);
             throw new Error(`Error getting icon list: ${error.message}`);
         }
@@ -215,7 +215,7 @@ async function generateCssAndJson(icList) {
     $('#jsonTextarea').val(jsonContent);
     if (modifiedCss.length>0 || jsonContent.length>0) {toastr.success('Successfully generated, check the output fields.');}
   } catch (error) {
-    $('html, body').animate({ scrollTop: $('html').offset().top }, 500);
+    $('html, body').animate({ scrollTop: $('html').offset().top }, 200);
     toastr.error(error.message);
     console.error(error.message);
   }
@@ -408,7 +408,7 @@ function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
           return $(this).find('svg').data('icon').split(':')[1];
         }).get();
         generateCssAndJson(selectedIcons);
-        $('html, body').animate({ scrollTop: $('#result').offset().top }, 500);
+        $('html, body').animate({ scrollTop: $('#result').offset().top }, 200);
       });
 
       // Event handler for "Generate for All" button
@@ -417,7 +417,7 @@ function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
           return $(this).data('icon');
         }).get();
         generateCssAndJson(allIcons);
-        $('html, body').animate({ scrollTop: $('#result').offset().top }, 500);
+        $('html, body').animate({ scrollTop: $('#result').offset().top }, 200);
       });
 
       // Event handler for "Download CSS" button
@@ -436,7 +436,7 @@ function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
 
         const iconData = extractIconsFromCSS(cssContent);
         $('#jsonTextarea').val(JSON.stringify(iconData, null, 2));
-        $('html, body').animate({ scrollTop: $('#result').offset().top }, 500);
+        $('html, body').animate({ scrollTop: $('#result').offset().top }, 200);
         // Log the result
         toastr.success("Converted to WeWeb JSON!");
       });
