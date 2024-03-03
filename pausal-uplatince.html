@@ -571,9 +571,9 @@ function gen_qr(reciept_id){
   var code =  $('#'+reciept_id+' .field-code p').text().replace(/\D/g, "");
   var sum =  cleanSum($('#'+reciept_id+' .field-sum p').text());
   var account =  $('#'+reciept_id+' .field-account p').text().replace(/\D/g, "");
-  var model =  $('#'+reciept_id+' .field-model p').text().replace(/\D/g, "");
+  var model = $('#'+reciept_id+' .field-model p').text().replace(/\D/g, "").slice(-2).padStart(2, '0');
   var target =  $('#'+reciept_id+' .field-target p').text().replace(/\D/g, "");
-  var data = `K:PR|V:01|C:1|R:${account}|N:${recipient}|I:${currency}${sum}|SF:${code}|S:${title}|RO:${target}|P:${payer}`;
+  var data = `K:PR|V:01|C:1|R:${account}|N:${recipient}|I:${currency}${sum}|SF:${code}|S:${title}|RO:${model}${target}|P:${payer}`;
  // console.log(data);
   var qr = qrcode(0, 'L');
   qr.addData(data);
