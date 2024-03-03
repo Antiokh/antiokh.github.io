@@ -576,7 +576,7 @@ function gen_qr(reciept_id){
   var data = `K:PR|V:01|C:1|R:${account}|N:${recipient}|I:${currency}${sum}|SF:${code}|S:${title}|RO:${model}${target}|P:${payer}`;
  // console.log(data);
  qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8'];
-  var qr = qrcode(0, 'L');
+  var qr = qrcode(0, 'M');
   qr.addData(data);
   qr.make();
   //qr.createDataURL();
