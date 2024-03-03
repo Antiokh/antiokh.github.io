@@ -476,7 +476,7 @@
                   <p class="s2">износ</p>
                 </div>
                 <div class="field field-sum">
-                  <p class="s3 nowrap" contenteditable="true" id="sum1">0.00</p>
+                  <p class="s3 nowrap" contenteditable="true" id="sum1" onkeyup="updateTotalSum();">0.00</p>
                 </div>
               </div>
             </div>
@@ -573,7 +573,7 @@
                 <p class="s2">износ</p>
               </div>
               <div class="field field-sum">
-                <p class="s3 nowrap" contenteditable="true" id="sum2">0.00</p>
+                <p class="s3 nowrap" contenteditable="true" id="sum2" onkeyup="updateTotalSum();">0.00</p>
               </div>
             </div>
           </div>
@@ -670,7 +670,7 @@
               <p class="s2">износ</p>
             </div>
             <div class="field field-sum">
-              <p class="s3 nowrap" contenteditable="true" id="sum3">0.00</p>
+              <p class="s3 nowrap" contenteditable="true" id="sum3" onkeyup="updateTotalSum();">0.00</p>
             </div>
           </div>
         </div>
@@ -768,7 +768,7 @@
               <p class="s2">износ</p>
             </div>
             <div class="field field-sum">
-              <p class="s3 nowrap" contenteditable="true" id="sum4">0.00</p>
+              <p class="s3 nowrap" contenteditable="true" id="sum4" onkeyup="updateTotalSum();">0.00</p>
             </div>
           </div>
         </div>
@@ -943,6 +943,8 @@ if (element.length > 0) {
 }
 
 });
+
+updateTotalSum();
 
 // Add click event to copy link button
 $("#copy-link-btn").on("click", function () {
