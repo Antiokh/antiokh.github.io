@@ -163,14 +163,6 @@
       width: 68% !important;
     }
 
-    .select-crossing,
-    .select-sex {
-      margin-left: auto;
-      display: inline-block;
-      padding-top: 0px;
-      padding-bottom: 0px;
-      border: solid 1px DDD;
-    }
 
     @media print {
 
@@ -186,16 +178,17 @@
     }
 
     select {
-      padding: 3px;
-      margin-top: 3px;
+      padding: 0px;
+      margin-top: 2px;
       margin-bottom: 0px;
       font-size: 12pt;
-      width: 120px;
-      height: 34px;
+      width: 36px;
+      height: 21px;
       display: block;
       position: relative;
       float: right;
       cursor: pointer;
+      margin-left: 5px;
     }
 
     #copylink {
@@ -407,7 +400,12 @@
         title="Нажмите чтобы скопировать ссылку с данными"><i class="fa-solid fa-floppy-disk"></i><span
           class="hint noprint"> ← нажми чтобы скопировать ссылку</span></div>
       <div class="noprint" style="display:inline-block; width:24%; margin-left:auto;">
-        <p class="s1" style="padding-top: 4pt;text-indent: 0pt;text-align: right;">Платёжная квитанция</p>
+        <p class="s1" style="padding-top: 4pt;text-indent: 0pt;text-align: right;"><span id="count" style="opacity:0">1</span>Количество квитанций<select class="noprint select-count" id="select-count">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select></p>
       </div>
     </div>
 
@@ -917,9 +915,11 @@ var urlParams = new URLSearchParams(window.location.search);
 var count = urlParams.get('count');
 if (count) { //
   count = count * 1;
+  gen_qr('reciept1');
   if (count>1) {$('#reciept2').show();  gen_qr('reciept2');}
   if (count>2) {$('#reciept3').show();  gen_qr('reciept3');}
   if (count>3) {$('#reciept4').show();  gen_qr('reciept4');}
+  $('#select-count').val(count);
 } else {count = 1;}
 
 // Loop through each parameter name
@@ -1030,6 +1030,20 @@ $("#dontshare").css("font-weight", "bold").removeClass("h2").addClass("dontshare
   alert("Ссылка скопирована!");
 });
 });
+
+//change the count of bills
+$("#select-count").change(function () {
+    // Получаем выбранное значение
+    var selectedValue = $(this).val();
+    // Устанавливаем выбранное значение в элемент с идентификатором #test
+    count = selectedValue*1;
+    if (count>1) {$('#reciept2').show();  gen_qr('reciept2');} else {$('#reciept2').hide();}
+    if (count>2) {$('#reciept3').show();  gen_qr('reciept3');} else {$('#reciept3').hide();}
+    if (count>3) {$('#reciept4').show();  gen_qr('reciept4');} else {$('#reciept4').hide();}
+    updateTotalSum();
+    $('#count').text(count);
+  });
+
 });
 
 // Function to shorten the URL using TinyURL
