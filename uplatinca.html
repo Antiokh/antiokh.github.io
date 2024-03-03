@@ -903,9 +903,9 @@ var urlParams = new URLSearchParams(window.location.search);
 var count = urlParams.get('count');
 if (count) { //
   count = count * 1;
-  if (count>1) {$('#reciept2').show();  gen_qr('#reciept2');}
-  if (count>2) {$('#reciept3').show();  gen_qr('#reciept3');}
-  if (count>3) {$('#reciept4').show();  gen_qr('#reciept4');}
+  if (count>1) {$('#reciept2').show();  gen_qr('reciept2');}
+  if (count>2) {$('#reciept3').show();  gen_qr('reciept3');}
+  if (count>3) {$('#reciept4').show();  gen_qr('reciept4');}
 } else {count = 1;}
 
 // Loop through each parameter name
