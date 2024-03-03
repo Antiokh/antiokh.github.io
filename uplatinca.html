@@ -895,7 +895,7 @@ function formatAccount(number) {
 }
 
 function gen_qr(reciept_id){
-  //https://ips.nbs.rs/PDF/pdfPreporukeValidacijaLat.pdf
+  // https://ips.nbs.rs/PDF/pdfPreporukeValidacijaLat.pdf
   var payer =  toLat($('#'+reciept_id+' .field-payer p').text());
   var title =  toLat($('#'+reciept_id+' .field-title p').text());
   var recipient =  toLat($('#'+reciept_id+' .field-recipient p').text());
