@@ -28,6 +28,10 @@
       text-indent: 0;
     }
 
+    table, td, tr {
+      border: none;
+    }
+
     p {
       color: black;
       font-family: "Times New Roman", serif;
@@ -297,23 +301,15 @@
 
 .reciept {
     border: dashed 1px;
-    padding: 3px;
-    display: grid;
+    padding: 7px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
     gap: 20px;
-    grid-template-areas: 
-    'd11 d12 qr'
-    'd21 d22 qr'
-    'd31 d32 qr'    ;
-    padding-bottom: 20px;
 }
 
-.nowrap {
-  white-space: nowrap !important;
-  max-height: 40px;
-}
-
-.mid-row {
-    margin-bottom: auto;
+td > div {
+    margin: auto;
     display: flex !important;
     background: none;
     width: 100%;
@@ -321,6 +317,13 @@
     flex: 0 0 auto;
     gap: 20px;
 }
+
+.gjs-image-box {
+    height: 200px;
+    width: 100%;
+}
+
+
 
 .qr-code {
     color: black;
@@ -344,7 +347,6 @@
 }
 
 .col-qr {
-  grid-area: qr;
     flex: 0 0 auto;
     display: flex;
     justify-content: center;
@@ -415,92 +417,114 @@
 
       <div style="width:100%">
         <div id="reciept1" class="reciept" onkeyup="gen_qr('reciept1');" onclick="gen_qr('reciept1');">
-          
-            <div class="d11" style="grid-area: d11;">
-              <div class="data-group fullrow">
-              <div class="label">
-                <p class="s2">уплатилац</p>
-              </div>
-              <div class="field field-payer">
-                <p class="s3" contenteditable="true" id="payer1">Anton Nazarov PR Veb Portali Beograd</p>
-              </div>
-            </div>
-            </div>
-            <div class="d21" style="grid-area: d21;">
-              <div class="data-group fullrow">
-              <div class="label">
-                <p class="s2">сврха уплате</p>
-              </div>
-              <div class="field field-title">
-                <p class="s3" contenteditable="true" id="title1">Назначение платежа</p>
-              </div>
-            </div>
-            </div>
-            <div class="d31" style="grid-area: d31;">
-              <div class="data-group fullrow">
-              <div class="label">
-                <p class="s2">прималац</p>
-              </div>
-              <div class="field field-recipient">
-                <p class="s3" contenteditable="true" id="recipient1">Пореска управа Републике Србије</p>
-              </div>
-            </div>
-            </div>
-            <div class="mid-row d12" style="grid-area: d12;">
-              <div class="data-group">
-                <div class="label">
-                  <p class="s2">шифра</p>
-                </div>
-                <div class="field field-code">
-                  <p class="s3 nowrap" contenteditable="true" id="code1">153</p>
-                </div>
-              </div>
-              <div class="data-group">
-                <div class="label">
-                  <p class="s2">валута</p>
-                </div>
-                <div class="field field-currency">
-                  <p class="s3 nowrap" contenteditable="false" id="currency1">RSD</p>
-                </div>
-              </div>
-              <div class="data-group fullrow">
-                <div class="label">
-                  <p class="s2">износ</p>
-                </div>
-                <div class="field field-sum">
-                  <p class="s3 nowrap" contenteditable="true" id="sum1">0.00</p>
-                </div>
-              </div>
-            </div>
-            <div class="mid-row d22" style="grid-area: d22;">
-              <div class="data-group fullrow">
-                <div class="label">
-                  <p class="s2">рачун примаоца</p>
-                </div>
-                <div class="field field-account">
-                  <p class="s3 nowrap" contenteditable="true" id="account1">840-000000000-00</p>
-                </div>
-              </div>
-            </div>
-            <div class="mid-row d32" style="grid-area: d32;">
-              <div class="data-group">
-                <div class="label">
-                  <p class="s2">модел</p>
-                </div>
-                <div class="field field-model">
-                  <p class="s3 nowrap" contenteditable="true" id="model1">97</p>
-                </div>
-              </div>
-              <div class="data-group fullrow">
-                <div class="label">
-                  <p class="s2">позив на број (одобрење)</p>
-                </div>
-                <div class="field field-target">
-                  <p class="s3 nowrap" contenteditable="true" id="target1">1234567890123456789</p>
-                </div>
-              </div>
-            </div>
-          <div class="col-qr" style="grid-area: qr;">
+          <div class="col-table">
+            <table>
+              <tr>
+                <td><!-- 1st row 1st col -->
+                  <div class="tablerow">
+                    <div>
+                    <div class="label">
+                      <p class="s2">уплатилац</p>
+                    </div>
+                    <div class="field field-payer">
+                      <p class="s3" contenteditable="true" id="payer1">Anton Nazarov PR Veb Portali Beograd</p>
+                    </div>
+                  </div>
+                  </div>
+                </td>
+                <td><!-- 1st row 2st col -->
+                  <div class="tablerow">
+                    <div>
+                      <div class="label">
+                        <p class="s2">шифра</p>
+                      </div>
+                      <div class="field field-code">
+                        <p class="s3" contenteditable="true" id="code1">153</p>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="label">
+                        <p class="s2">валута</p>
+                      </div>
+                      <div class="field field-currency">
+                        <p class="s3" contenteditable="false" id="currency1">RSD</p>
+                      </div>
+                    </div>
+                    <div class="data-group fullrow">
+                      <div class="label">
+                        <p class="s2">износ</p>
+                      </div>
+                      <div class="field field-sum">
+                        <p class="s3" contenteditable="true" id="sum1">0.00</p>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><!-- 2nd row 1st col -->
+                  <div class="tablerow">
+                  <div>
+                    <div class="label">
+                      <p class="s2">сврха уплате</p>
+                    </div>
+                    <div class="field field-title">
+                      <p class="s3" contenteditable="true" id="title1">Назначение платежа</p>
+                    </div>
+                  </div>
+                  </div>
+                </td>
+                <td><!-- 2nd row 2nd col -->
+                  <div class="tablerow">
+                    <div class="data-group fullrow">
+                      <div class="label">
+                        <p class="s2">рачун примаоца</p>
+                      </div>
+                      <div class="field field-account">
+                        <p class="s3" contenteditable="true" id="account1">840-000000000-00</p>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><!-- 3rd row 1st col -->
+                  <div class="tablerow">
+                  <div>
+                    <div class="label">
+                      <p class="s2">прималац</p>
+                    </div>
+                    <div class="field field-recipient">
+                      <p class="s3" contenteditable="true" id="recipient1">Пореска управа Републике Србије</p>
+                    </div>
+                  </div>
+                  </div>
+                </td>
+                <td><!-- 3rd row 2nd col -->
+                  <div class="tablerow">
+                    <div class="data-group">
+                      <div class="label">
+                        <p class="s2">модел</p>
+                      </div>
+                      <div class="field field-model">
+                        <p class="s3" contenteditable="true" id="model1">97</p>
+                      </div>
+                    </div>
+                    <div class="data-group fullrow">
+                      <div class="label">
+                        <p class="s2">позив на број (одобрење)</p>
+                      </div>
+                      <div class="field field-target">
+                        <p class="s3" contenteditable="true" id="target1">1234567890123456789</p>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+          </div>
+          <div class="col-qr">
             <div>
               <div>
                 <div class="qr-code-box">
