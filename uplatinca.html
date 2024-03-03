@@ -906,7 +906,7 @@ if (count) { //
   if (count>1) {$('#reciept2').show();  gen_qr('#reciept2');}
   if (count>2) {$('#reciept3').show();  gen_qr('#reciept3');}
   if (count>3) {$('#reciept4').show();  gen_qr('#reciept4');}
-}
+} else {count = 1;}
 
 // Loop through each parameter name
 urlParams.forEach(function (value, key) {
@@ -942,22 +942,51 @@ var blockedIds = ["note"];
 // Create an empty object to store the parameter-value pairs
 var parameters = {};
 
+parameters['count'] = count;
+
+// Function to check if a string contains a number greater than a given count
+function containsNumberGreaterThanCount(str, count) {
+  var matches = str.match(/\d+/g); // Extract numbers from the string
+  if (matches) {
+    for (var i = 0; i < matches.length; i++) {
+      if (parseInt(matches[i]) > count) {
+        return true; // If any number is greater than count, return true
+      }
+    }
+  }
+  return false; // No number greater than count found
+}
+
+// Function to remove numbers from the end of similar IDs
+function removeNumbersFromSimilarIDs(id) {
+  // Example: If id is "sum1" or "code1", remove the number from the end
+  return id.replace(/\d+$/, '');
+}
+
 // Loop through each editable element with an ID
 $('*[contenteditable="true"]').each(function () {
-  // Get the element's ID and text content
-  //var id = $(this).parent().attr('class').replace('field field-',''); class-based, should be hidden for now, in the future if id1=id2=id3=id4 replace it with class
   var id = $(this).attr('id');
-
   var value = $(this).text().trim();
 
-  // If the element has an ID and a non-empty value, add it to the parameters object
-  //if (id && value !== "") {
- 
-// Check if the ID is not in the blocked IDs list and the element has a non-empty value
-  if (!blockedIds.includes(id) && id && value !== "") {
-    parameters[id] = value;
+  // Check if the ID is not in the blocked IDs list, the element has a non-empty value, 
+  // and the ID doesn't contain a number greater than the count
+  if (!blockedIds.includes(id) && id && value !== "" && !containsNumberGreaterThanCount(id, count)) {
+    // If the ID contains a number, remove it
+    var baseID = removeNumbersFromSimilarIDs(id);
+
+    // Check if we already have a parameter with the base ID
+    if (!parameters[baseID]) {
+      parameters[baseID] = value; // If not, set it
+    } else {
+      // If we already have a parameter with the base ID, compare values
+      if (parameters[baseID] !== value) {
+        // If values are different, set the parameter with the full ID
+        parameters[id] = value;
+      }
+    }
   }
 });
+
 
 // Check if there are existing parameters in the current URL
 var separator = currentUrl.indexOf("?") === -1 ? "?" : "&";
