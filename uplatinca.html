@@ -899,7 +899,7 @@ function gen_qr(reciept_id){
   var account =  $('#'+reciept_id+' .field-account p').text().replace(/\D/g, "");
   var model = $('#'+reciept_id+' .field-model p').text().replace(/\D/g, "").slice(-2).padStart(2, '0');
   var target =  $('#'+reciept_id+' .field-target p').text().replace(/\D/g, "");
-  var data = `K:PR|V:01|C:1|R:${account}|N:${recipient}|I:${currency}${sum}|SF:${code}|S:${title}|RO:${model}${target}|P:${payer}`;
+  var data = `K:PR|V:01|C:1|R:${account}|N:${recipient}|I:${currency}${sum}|P:${payer}|SF:${code}|S:${title}|RO:${model}${target}`;
  // console.log(data);
  qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8'];
   var qr = qrcode(0, 'M');
