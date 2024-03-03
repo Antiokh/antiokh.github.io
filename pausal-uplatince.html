@@ -631,11 +631,10 @@ var element = $("#reciept1 .field.field-" + key + " p");
 if (element.length > 0) {
   // Set the value of the element
   element.text(value);
+  //gen qr code
+  gen_qr('reciept1');
 }
 });
-
-//gen qr code
-gen_qr('reciept1');
 
 // Add click event to copy link button
 $("#copy-link-btn").on("click", function () {
