@@ -613,7 +613,7 @@ if (element.length > 0) {
   // Set the value of the element
   element.text(value);
   //gen qr code after update
-  gen_qr(closest('.reciept').attr('id'));
+  gen_qr(element.closest('.reciept').attr('id'));
 }
 
 // Check if there's an element with the corresponding ID
@@ -622,7 +622,7 @@ if (element.length > 0) {
   // Set the value of the element
   element.text(value);
   //gen qr code after update
-  gen_qr(closest('.reciept').attr('id'));
+  gen_qr(element.closest('.reciept').attr('id'));
 }
 
 });
