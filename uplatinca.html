@@ -7,8 +7,8 @@
   <title>Генератор платёжек с QR-кодом в Сербии</title>
   <meta name="description"
     content="Генератор платёжек с QR-кодом в Сербии." />
-  <meta name="keywords"
-    content="уплатница, bill, racun, račun, raćun" />
+    <meta name="keywords" content="квитанция для Сербии, уплатница Сербия, накнада Сербия, квитанция на сербском, квитанция на кириллице, квитанция на латинице, uplatnica Srbija, nalog za plaćanje, квитанция Русский, uplatnica Ruski, квитанция Сербский, Serbian payment receipt, Serbian invoice, Serbian bill, Russian Serbian payment receipt, Russian Serbian invoice, Russian Serbian bill, cyrillic receipt, latin receipt, квитанция кириллица, квитанция латиница, квитанция для русскоговорящих, квитанция онлайн, печать квитанции, оплата в Сербии, платежная квитанция, оплатить квитанцию онлайн, платежный документ, квитанция за услуги, квитанция за товары, счет для оплаты, оплата услуг в Сербии, платеж в Сербии, оплата за интернет, оплата за телефон, оплата за коммунальные услуги, сербский банковский платеж, сербский банковский документ">
+    <meta name="keywords" content="Уплатница, Уплантица, Уплатницо, Уплантнице, Квитанция, Квитаница, Квитаница, Квитанице, Чек, Чек, Че, Чек, Счёт, Счет, Счет, Счёт, Билл, Бил, Налог, Налаг, Налогг, Накнада, Накнадо, Накнда, Racun, Račun, Raćun, Rcaun, Rácun, Raću, Рацун, Рачун, Раћун, Ракун, Бил, Били, Рацун, Накнада, Накнда, Накнад, Racun, Račun, Raćun, Rcaun, Rácun, Raću, Такс, Тад, Рачан, Рацин, Реквин, Раца, Bill, Bilk, Racin, Requin, Raca, Ишбенн, Уплатниза, Чед, Тадд, Гацина, Чек, Скхо, Счет, Рацун, Налог, Че, Раца" />
   <meta name="robots" content="index, follow" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -903,9 +903,9 @@ var urlParams = new URLSearchParams(window.location.search);
 var count = urlParams.get('count');
 if (count) { //
   count = count * 1;
-  if (count>1) {$('#reciept2').show();}
-  if (count>2) {$('#reciept3').show();}
-  if (count>3) {$('#reciept4').show();}
+  if (count>1) {$('#reciept2').show();  gen_qr('#reciept2');}
+  if (count>2) {$('#reciept3').show();  gen_qr('#reciept3');}
+  if (count>3) {$('#reciept4').show();  gen_qr('#reciept4');}
 }
 
 // Loop through each parameter name
