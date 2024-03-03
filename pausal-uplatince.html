@@ -572,7 +572,7 @@ function gen_qr(reciept_id){
   var model =  $('#'+reciept_id+' .field-model p').text().replace(/\D/g, "");
   var target =  $('#'+reciept_id+' .field-target p').text().replace(/\D/g, "");
   var data = `K:PR|V:01|C:1|R:${account}|N:${recipient}|I:${currency}${sum}|SF:${code}|S:${title}|RO:${target}`;
-  console.log(data);
+ // console.log(data);
   var qr = qrcode(0, 'L');
   qr.addData(data);
   qr.make();
@@ -590,7 +590,7 @@ var currentUrl = window.location.href.split('?')[0];
 // Set the href attribute of .currentpage anchor element to the current URL
 $("#currentpage").attr("href", currentUrl);
 $("#currentpage").text(currentUrl);
-console.log(atob("RGV2ZWxvcGVkIGJ5IEBhbnRpb2toIG1haWwgbWU6IGFudGlva2hAeWFuZGV4LnJ1"));
+//console.log(atob("RGV2ZWxvcGVkIGJ5IEBhbnRpb2toIG1haWwgbWU6IGFudGlva2hAeWFuZGV4LnJ1"));
     /*
 $("#border-crossing").change(function () {
 // Получаем выбранное значение
