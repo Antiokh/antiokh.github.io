@@ -649,7 +649,7 @@ var parameters = {};
 $('*[contenteditable="true"]').each(function () {
   // Get the element's ID and text content
   //var id = $(this).parent().attr('class').replace('field field-',''); class-based, should be hidden for now, in the future if id1=id2=id3=id4 replace it with class
-  var id = $(this).parent().attr('id');
+  var id = $(this).attr('id');
 
   var value = $(this).text().trim();
 
