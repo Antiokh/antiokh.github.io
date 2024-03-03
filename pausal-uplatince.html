@@ -314,13 +314,6 @@
     gap: 20px;
 }
 
-.data-group {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    flex: 0 1 auto;
-}
-
 .gjs-image-box {
     height: 200px;
     width: 100%;
@@ -357,8 +350,16 @@
     align-items: center;
 }
 
+
+.data-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 0 1 auto;
+}
+
 .fullrow {
-    flex: 1 1 0%;
+  flex-grow: 1;
 }
 
 .save-row {
@@ -456,7 +457,7 @@
                   <p class="s3" contenteditable="false" id="currency1">RSD</p>
                 </div>
               </div>
-              <div class="fullrow">
+              <div class="data-group fullrow">
                 <div class="label">
                   <p class="s2">износ</p>
                 </div>
@@ -466,7 +467,7 @@
               </div>
             </div>
             <div class="mid-row">
-              <div class="fullrow">
+              <div class="data-group fullrow">
                 <div class="label">
                   <p class="s2">рачун примаоца</p>
                 </div>
@@ -484,7 +485,7 @@
                   <p class="s3" contenteditable="true" id="model1">97</p>
                 </div>
               </div>
-              <div class="fullrow">
+              <div class="data-group fullrow">
                 <div class="label">
                   <p class="s2">позив на број (одобрење)</p>
                 </div>
