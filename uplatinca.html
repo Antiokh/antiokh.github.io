@@ -297,15 +297,23 @@
 
 .reciept {
     border: dashed 1px;
-    padding: 7px;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-around;
+    padding: 3px;
+    display: grid;
     gap: 20px;
+    grid-template-areas: 
+    'd11 d12 qr'
+    'd21 d22 qr'
+    'd31 d32 qr'    ;
+    padding-bottom: 20px;
+}
+
+.nowrap {
+  white-space: nowrap !important;
+  max-height: 40px;
 }
 
 .mid-row {
-    margin: auto;
+    margin-bottom: auto;
     display: flex !important;
     background: none;
     width: 100%;
@@ -313,20 +321,6 @@
     flex: 0 0 auto;
     gap: 20px;
 }
-
-.data-group {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    flex: 0 1 auto;
-}
-
-.gjs-image-box {
-    height: 200px;
-    width: 100%;
-}
-
-
 
 .qr-code {
     color: black;
@@ -350,6 +344,7 @@
 }
 
 .col-qr {
+  grid-area: qr;
     flex: 0 0 auto;
     display: flex;
     justify-content: center;
@@ -357,16 +352,27 @@
     align-items: center;
 }
 
+
+.data-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 0 1 auto;
+}
+
 .fullrow {
-    flex: 1 1 0%;
+  flex-grow: 1;
 }
 
 .save-row {
     display: flex !important;
     justify-content: space-between;
 }
-  </style>
 
+.reciept div.qr-code-image svg {
+  width: 100% !important;
+}
+</style>
 
 
 
@@ -399,103 +405,106 @@
 
     <div style="border: dashed 1px; padding: 7px">
 
-      <div style="width:100%">
-        <div style="display: inline-block; width:140px; background: none;"></div>
-        <div style="margin:auto; display: inline-block; width: 400px; background: none;">
-          <p class="s3" style="padding-left: 2pt;text-indent: 0pt;line-height: 8pt;text-align: center;">Уплатница</p>
+      <div style="width:100%;display: flex;">
+        <div style="display: inline-block; width:140px; background: none;"><p class="s3" style="padding-left: 2pt;text-indent: 0pt;line-height: 8pt;text-align: left;">Уплатница</p></div>
+        <div style="display: block;background: none;width: 100%;text-align: right;">
+          <p class="s3" style="padding-right: 5pt;text-indent: 0pt;line-height: 8pt;text-align: right;">QR код за плаћање</p>
 
         </div>
       </div>
 
       <div style="width:100%">
-        <div id="reciept1" class="reciept" onkeypress="gen_qr('reciept1');" onclick="gen_qr('reciept1');">
-          <div class="col-left" id="i4v4s">
-            <div id="iv4rg">
-              <div class="label" id="i8jef">
-                <p class="s2" id="iath5">уплатилац</p>
+        <div id="reciept1" class="reciept" onkeyup="gen_qr('reciept1');" onclick="gen_qr('reciept1');">
+          
+            <div class="d11" style="grid-area: d11;">
+              <div class="data-group fullrow">
+              <div class="label">
+                <p class="s2">уплатилац</p>
               </div>
-              <div class="field field-payer" id="ivl78">
-                <p id="iw4n2" class="s3" contenteditable="true">Anton Nazarov PR Veb Portali Beograd</p>
-              </div>
-            </div>
-            <div id="i7zn5">
-              <div class="label" id="i6q2q">
-                <p class="s2" id="i56ij">сврха уплате</p>
-              </div>
-              <div class="field field-title" id="i2d9j">
-                <p class="s3" contenteditable="true" id="imzy5">Назначение платежа</p>
+              <div class="field field-payer">
+                <p class="s3" contenteditable="true" id="payer1">Anton Nazarov PR Veb Portali Beograd</p>
               </div>
             </div>
-            <div id="ivmiu">
-              <div class="label" id="in3hl">
-                <p class="s2" id="iqkpm">прималац</p>
+            </div>
+            <div class="d21" style="grid-area: d21;">
+              <div class="data-group fullrow">
+              <div class="label">
+                <p class="s2">сврха уплате</p>
               </div>
-              <div class="field field-recipient" id="i51cm">
-                <p class="s3" contenteditable="true" id="idvli">Пореска управа Републике Србије</p>
+              <div class="field field-title">
+                <p class="s3" contenteditable="true" id="title1">Назначение платежа</p>
               </div>
             </div>
-          </div>
-          <div class="col-mid" id="ipnla">
-            <div class="mid-row" id="ieq7j">
-              <div id="irdhf">
-                <div class="label" id="i7sni">
-                  <p class="s2" id="ikydf">шифра</p>
-                </div>
-                <div class="field field-code" id="iu89n">
-                  <p class="s3" contenteditable="true" id="iqrfn">153</p>
-                </div>
+            </div>
+            <div class="d31" style="grid-area: d31;">
+              <div class="data-group fullrow">
+              <div class="label">
+                <p class="s2">прималац</p>
               </div>
-              <div id="idulqp">
-                <div class="label" id="isrypv">
-                  <p class="s2" id="i4hmjw">валута</p>
-                </div>
-                <div class="field field-currency" id="iep0gx">
-                  <p class="s3" contenteditable="false" id="ild0fz">RSD</p>
-                </div>
-              </div>
-              <div class="fullrow" id="ilkyfc">
-                <div class="label" id="ibsvh">
-                  <p class="s2" id="i6yeh">износ</p>
-                </div>
-                <div class="field field-sum" id="ibvtg">
-                  <p class="s3" contenteditable="true" id="iiqck">0.00</p>
-                </div>
+              <div class="field field-recipient">
+                <p class="s3" contenteditable="true" id="recipient1">Пореска управа Републике Србије</p>
               </div>
             </div>
-            <div class="mid-row" id="iougcr">
-              <div class="fullrow" id="i0be6j">
-                <div class="label" id="ie6y9v">
-                  <p class="s2" id="i47r7a">рачун примаоца</p>
+            </div>
+            <div class="mid-row d12" style="grid-area: d12;">
+              <div class="data-group">
+                <div class="label">
+                  <p class="s2">шифра</p>
                 </div>
-                <div class="field field-account" id="iculho">
-                  <p class="s3" contenteditable="true" id="iv9d8f">840-000000000-00</p>
+                <div class="field field-code">
+                  <p class="s3 nowrap" contenteditable="true" id="code1">153</p>
+                </div>
+              </div>
+              <div class="data-group">
+                <div class="label">
+                  <p class="s2">валута</p>
+                </div>
+                <div class="field field-currency">
+                  <p class="s3 nowrap" contenteditable="false" id="currency1">RSD</p>
+                </div>
+              </div>
+              <div class="data-group fullrow">
+                <div class="label">
+                  <p class="s2">износ</p>
+                </div>
+                <div class="field field-sum">
+                  <p class="s3 nowrap" contenteditable="true" id="sum1">0.00</p>
                 </div>
               </div>
             </div>
-            <div class="mid-row" id="iy9vau">
-              <div class="data-group" id="ic8zpy">
-                <div class="label" id="ix5a7f">
-                  <p class="s2" id="is0dn2">модел</p>
+            <div class="mid-row d22" style="grid-area: d22;">
+              <div class="data-group fullrow">
+                <div class="label">
+                  <p class="s2">рачун примаоца</p>
                 </div>
-                <div class="field field-model" id="isng2m">
-                  <p class="s3" contenteditable="true" id="ibwgxl">97</p>
-                </div>
-              </div>
-              <div class="fullrow" id="i3ruhj">
-                <div class="label" id="ifige3">
-                  <p class="s2" id="ieikgc">позив на број (одобрење)</p>
-                </div>
-                <div class="field field-target" id="itihuc">
-                  <p class="s3" contenteditable="true" id="i78izi">1234567890123456789</p>
+                <div class="field field-account">
+                  <p class="s3 nowrap" contenteditable="true" id="account1">840-000000000-00</p>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-qr" id="il1pbw">
-            <div id="iojl32">
-              <div id="ibaurx">
-                <div class="qr-code-box" id="ivl3l9">
-                  <div class="qr-code-image" id="indppy">
+            <div class="mid-row d32" style="grid-area: d32;">
+              <div class="data-group">
+                <div class="label">
+                  <p class="s2">модел</p>
+                </div>
+                <div class="field field-model">
+                  <p class="s3 nowrap" contenteditable="true" id="model1">97</p>
+                </div>
+              </div>
+              <div class="data-group fullrow">
+                <div class="label">
+                  <p class="s2">позив на број (одобрење)</p>
+                </div>
+                <div class="field field-target">
+                  <p class="s3 nowrap" contenteditable="true" id="target1">1234567890123456789</p>
+                </div>
+              </div>
+            </div>
+          <div class="col-qr" style="grid-area: qr;">
+            <div>
+              <div>
+                <div class="qr-code-box">
+                  <div class="qr-code-image">
                   </div>
                 </div>
               </div>
@@ -516,7 +525,7 @@
   <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js'></script>
   <script id="rendered-js">
 
-function transliterateToLatin(text) {
+function toLat(text) {
     const cyrillicToLatinMap = {
         'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'ђ': 'đ', 'е': 'e', 'ж': 'ž', 'з': 'z', 'и': 'i',
         'ј': 'j', 'к': 'k', 'л': 'l', 'љ': 'lj', 'м': 'm', 'н': 'n', 'њ': 'nj', 'о': 'o', 'п': 'p', 'р': 'r',
@@ -560,23 +569,24 @@ function cleanSum(currencyString) {
 
 function gen_qr(reciept_id){
   //https://ips.nbs.rs/PDF/pdfPreporukeValidacijaLat.pdf
-  var payer =  transliterateToLatin($('#'+reciept_id+' .field-payer p').text());
-  var title =  transliterateToLatin($('#'+reciept_id+' .field-title p').text());
-  var recipient =  transliterateToLatin($('#'+reciept_id+' .field-recipient p').text());
+  var payer =  toLat($('#'+reciept_id+' .field-payer p').text());
+  var title =  toLat($('#'+reciept_id+' .field-title p').text());
+  var recipient =  toLat($('#'+reciept_id+' .field-recipient p').text());
   var currency =  'RSD';
   var code =  $('#'+reciept_id+' .field-code p').text().replace(/\D/g, "");
   var sum =  cleanSum($('#'+reciept_id+' .field-sum p').text());
   var account =  $('#'+reciept_id+' .field-account p').text().replace(/\D/g, "");
-  var model =  $('#'+reciept_id+' .field-model p').text().replace(/\D/g, "");
+  var model = $('#'+reciept_id+' .field-model p').text().replace(/\D/g, "").slice(-2).padStart(2, '0');
   var target =  $('#'+reciept_id+' .field-target p').text().replace(/\D/g, "");
-  var data = `K:PR|V:01|C:1|R:${account}|N:${recipient}|I:${currency}${sum}|SF:${code}|S:${title}|RO:${target}|P:${payer}`;
+  var data = `K:PR|V:01|C:1|R:${account}|N:${recipient}|I:${currency}${sum}|SF:${code}|S:${title}|RO:${model}${target}|P:${payer}`;
  // console.log(data);
-  var qr = qrcode(0, 'L');
+ qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8'];
+  var qr = qrcode(0, 'M');
   qr.addData(data);
   qr.make();
   //qr.createDataURL();
   $('#'+reciept_id+' div.qr-code-image').html(qr.createSvgTag(10,1,'Alt'));
-  $('#reciept1 div.qr-code-image svg').width('100%');
+  //$('.reciept div.qr-code-image svg').width('100%');
 }
 
 
@@ -589,49 +599,38 @@ var currentUrl = window.location.href.split('?')[0];
 $("#currentpage").attr("href", currentUrl);
 $("#currentpage").text(currentUrl);
 console.log(atob("RGV2ZWxvcGVkIGJ5IEBhbnRpb2toIG1haWwgbWU6IGFudGlva2hAeWFuZGV4LnJ1"));
-    /*
-$("#border-crossing").change(function () {
-// Получаем выбранное значение
-var selectedValue = $(this).val();
-// Устанавливаем выбранное значение в элемент с идентификатором #test
-$("#entrance-place").text(selectedValue);
-});
-
-$("#select-sex").change(function () {
-// Получаем выбранное значение
-var selectedValue = $(this).val();
-// Устанавливаем выбранное значение в элемент с идентификатором #test
-$("#sex").text(selectedValue);
-});
-
-document.getElementById("entrance-date").addEventListener(
-"input",
-function () {
-  var texdate = $("#entrance-date").text();
-  console.log("entrance-change: " + texdate);
-  var newdate = Date.parseExact(texdate, "dd.MM.yyyy.")
-    .add(29)
-    .days()
-    .toString("dd.MM.yyyy.");
-  $("#note").text("Крайняя дата пребывания: " + newdate);
-},
-false
-);
-*/
 
 // Get URL parameters
 var urlParams = new URLSearchParams(window.location.search);
 
+var count = urlParams.get('count');
+if (count) { //
+  count = count * 1;
+  if (count>1) {$('#reciept2').show();}
+  if (count>2) {$('#reciept3').show();}
+  if (count>3) {$('#reciept4').show();}
+}
+
 // Loop through each parameter name
 urlParams.forEach(function (value, key) {
-// Check if there's an element with the corresponding ID
-var element = $("#reciept1 .field.field-" + key + " p");
+// Check if there's an element with the corresponding class
+var element = $(".reciept .field.field-" + key + " p");
 if (element.length > 0) {
   // Set the value of the element
   element.text(value);
   //gen qr code after update
-  gen_qr('reciept1');
+  gen_qr(element.closest('.reciept').attr('id'));
 }
+
+// Check if there's an element with the corresponding ID
+var element = $("#" + key);
+if (element.length > 0) {
+  // Set the value of the element
+  element.text(value);
+  //gen qr code after update
+  gen_qr(element.closest('.reciept').attr('id'));
+}
+
 });
 
 // Add click event to copy link button
@@ -649,8 +648,9 @@ var parameters = {};
 // Loop through each editable element with an ID
 $('*[contenteditable="true"]').each(function () {
   // Get the element's ID and text content
-  var id = $(this).parent().attr('class').replace('field field-','');
-  
+  //var id = $(this).parent().attr('class').replace('field field-',''); class-based, should be hidden for now, in the future if id1=id2=id3=id4 replace it with class
+  var id = $(this).parent().attr('id');
+
   var value = $(this).text().trim();
 
   // If the element has an ID and a non-empty value, add it to the parameters object
