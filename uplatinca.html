@@ -414,7 +414,7 @@
     <div style="border: dashed 1px; padding: 7px">
 
       <div style="width:100%;display: flex;">
-        <div style="display: inline-block; width:140px; background: none;"><p class="s3" style="padding-left: 2pt;text-indent: 0pt;line-height: 8pt;text-align: left;">Уплатница</p></div>
+        <div style="display: inline-block; width:140px; background: none;"><p class="s3" style="padding-left: 2pt;text-indent: 0pt;line-height: 8pt;text-align: left;">Уплатница на износ од <span id="total" class="total">X</span></p></div>
         <div style="display: block;background: none;width: 100%;text-align: right;">
           <p class="s3" style="padding-right: 7pt;text-indent: 0pt;line-height: 8pt;text-align: right;">QR код за плаћање</p>
 
@@ -863,6 +863,20 @@ function cleanSum(currencyString) {
     return step5;
 }
 
+// Function to calculate and update the total sum
+function updateTotalSum() {
+  var totalSum = 0;
+  $('.field-sum p').each(function() {
+    if ($(this).is(":visible")) {
+      var sumText = $(this).text().trim();
+      var cleanedSum = parseFloat(cleanSum(sumText).replace(',', '.'));
+      if (!isNaN(cleanedSum)) {
+        totalSum += cleanedSum;
+      }
+    }
+  });
+  $('#total').text(totalSum.toFixed(2)); // Adjust the precision as needed
+}
 
 function gen_qr(reciept_id){
   //https://ips.nbs.rs/PDF/pdfPreporukeValidacijaLat.pdf
