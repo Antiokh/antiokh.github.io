@@ -373,6 +373,10 @@
 .reciept div.qr-code-image svg {
   width: 100% !important;
 }
+
+.col1 {
+  max-width:100%;
+}
 </style>
 
 
@@ -417,7 +421,7 @@
       <div style="width:100%">
         <div id="reciept1" class="reciept" onkeyup="gen_qr('reciept1');" onclick="gen_qr('reciept1');">
           
-            <div class="d11" style="grid-area: d11;">
+            <div class="d11 col1" style="grid-area: d11;">
               <div class="data-group fullrow">
               <div class="label">
                 <p class="s2">уплатилац</p>
@@ -427,7 +431,7 @@
               </div>
             </div>
             </div>
-            <div class="d21" style="grid-area: d21;">
+            <div class="d21 col1" style="grid-area: d21;">
               <div class="data-group fullrow">
               <div class="label">
                 <p class="s2">сврха уплате</p>
@@ -437,7 +441,7 @@
               </div>
             </div>
             </div>
-            <div class="d31" style="grid-area: d31;">
+            <div class="d31 col1" style="grid-area: d31;">
               <div class="data-group fullrow">
               <div class="label">
                 <p class="s2">прималац</p>
@@ -447,7 +451,7 @@
               </div>
             </div>
             </div>
-            <div class="mid-row d12" style="grid-area: d12;">
+            <div class="mid-row d12 col2" style="grid-area: d12;">
               <div class="data-group">
                 <div class="label">
                   <p class="s2">шифра</p>
@@ -473,7 +477,7 @@
                 </div>
               </div>
             </div>
-            <div class="mid-row d22" style="grid-area: d22;">
+            <div class="mid-row d22 col2" style="grid-area: d22;">
               <div class="data-group fullrow">
                 <div class="label">
                   <p class="s2">рачун примаоца</p>
@@ -483,7 +487,7 @@
                 </div>
               </div>
             </div>
-            <div class="mid-row d32" style="grid-area: d32;">
+            <div class="mid-row d32 col2" style="grid-area: d32;">
               <div class="data-group">
                 <div class="label">
                   <p class="s2">модел</p>
