@@ -543,7 +543,7 @@ function parseAndDisplayColors(currentPicker) {
   // Step 1: Get colors from regexp to some array
   while ((match = regex.exec(cssInput)) !== null) {
     var fillColor = match[1];
-    if (!colors.includes(fillColor)) {
+    if (!colors.includes(fillColor) && fillColor != 'none') {
       colors.push(fillColor);
     }
   }
