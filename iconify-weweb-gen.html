@@ -33,6 +33,14 @@
     .toast-warning {
         background-color: #F89406;
     }
+    #color-line, #icon-colors, .form-label {
+      vertical-align: middle;
+    }
+
+    .color-picker, .icon-color {
+      padding: 1px;
+      margin: 3px;
+    }
   </style>
 </head>
 <body class="bg-light">
@@ -55,11 +63,12 @@
     <div class="mt-3" id="set-controls" style="display: none;">
         <button id="generateForAll" class="btn btn-primary">Generate for All</button>
         <button id="generateForSelected" class="btn btn-success">Generate for Selected</button>
+        <span id="icon-colors"></span>
     </div>
 
     <!-- CSS and JSON Textareas -->
     <div class="mt-5" id="result">
-      <label for="cssTextarea" class="form-label">Generated CSS:</label>
+      <label for="cssTextarea" class="form-label">Generated CSS:</label><span id="color-line"></span>
       <textarea id="cssTextarea" class="form-control" rows="10"></textarea>
       <button id="downloadCss" class="btn btn-primary mt-2">Download CSS</button>
       <button id="convertCss" class="btn btn-success mt-2" style="margin-left: auto; margin-right: auto;">Convert CSS</button>
@@ -92,6 +101,58 @@
     hideMethod: 'fadeOut',  // Hide method
     timeOut: 2000,  // Time to close the toast in milliseconds (e.g., 5000 = 5 seconds)
   };
+
+/*  $(document).on('input', '.color-picker', function() {
+    var oldColor = $(this).attr('value');
+    var newColor = $(this).val();
+    var cssInput = $('#cssTextarea').val();
+    
+    // Create a regular expression pattern to match fill='oldColor'
+    var regex = new RegExp("(fill=['\"])" + oldColor + "(['\"])", 'g');
+    
+    // Replace the fill attribute value with the new color
+    cssInput = cssInput.replace(regex, "$1" + newColor + "$2");
+    
+    // Update the CSS input text
+    $('#cssTextarea').val(cssInput);
+    
+    // Update the displayed color pickers
+    parseAndDisplayColors();
+});*/
+
+$(document).on('input', '.color-picker', function() {
+    var oldColor = $(this).attr('value');
+    var newColor = $(this).val();
+    var cssInput = $('#cssTextarea').val();
+    var oldPickerId = $(this).attr('id');
+    var newPickerId = 'cp-' + newColor.replace(/[#]/g, ''); // Unique ID for the color picker
+
+    // Replace the fill attribute value with the new color
+    var regex = new RegExp("(fill=['\"])" + oldColor + "(['\"])", 'g');
+    cssInput = cssInput.replace(regex, "$1" + newColor + "$2");
+
+    // Update the CSS input text
+    $('#cssTextarea').val(cssInput);
+
+    // Update the color picker ID and value
+    $(this).attr('id', newPickerId);
+    $(this).attr('value', newColor);
+
+    // Check if there's already a color picker associated with the new color
+    var existingPicker = $('#' + newPickerId);
+    if (existingPicker.length && existingPicker.attr('id') !== newPickerId) {
+      existingPicker.remove();
+    }
+
+    // If old color is no longer used, remove its color picker
+    if (!cssInput.includes(oldColor)) {
+      $('#' + oldPickerId).remove();
+    }
+
+    // Update the displayed color pickers
+    parseAndDisplayColors($(this));
+});
+
 
 
 // Function to fetch icon collections
@@ -161,6 +222,7 @@ function fetchIconCollections() {
             console.error('Error fetching icons:', error);
           }
         });
+        createAndDisplayIconColorPickers();
       }
 
         // Function to get icon list from collection endpoint
@@ -213,7 +275,10 @@ async function generateCssAndJson(icList) {
     // Display generated content
     $('#cssTextarea').val(modifiedCss);
     $('#jsonTextarea').val(jsonContent);
-    if (modifiedCss.length>0 || jsonContent.length>0) {toastr.success('Successfully generated, check the output fields.');}
+    if (modifiedCss.length>0 || jsonContent.length>0) {
+      toastr.success('Successfully generated, check the output fields.');
+      parseAndDisplayColors(); //color-line
+    }
   } catch (error) {
     $('html, body').animate({ scrollTop: $('html').offset().top }, 200);
     toastr.error(error.message);
@@ -451,6 +516,76 @@ function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
       // Initial fetch of icon collections
       fetchIconCollections();
     });
+/*
+    function parseAndDisplayColors() {
+  $('#color-line').empty();
+  var fillColors = {};
+  var cssInput = $('#cssTextarea').val();
+  var regex = /fill=['"](.+?)['"]/g;
+  var match;
+  while ((match = regex.exec(cssInput)) !== null) {
+    console.log('Match found:', match[1]);
+    var fillColor = match[1];
+    if (!fillColors[fillColor]) {
+      fillColors[fillColor] = true;
+      $('#color-line').append(`<input type="color" class="color-picker" value="${fillColor}">`);
+    }
+  }
+}*/
+
+function parseAndDisplayColors(currentPicker) {
+  console.log('parseAndDisplayColors');
+  var cssInput = $('#cssTextarea').val();
+  console.log(cssInput);
+  var regex = /fill=['"](.+?)['"]/g;
+  var match;
+  var colors = []; // Array to store colors from the CSS input
+  // Step 1: Get colors from regexp to some array
+  while ((match = regex.exec(cssInput)) !== null) {
+    var fillColor = match[1];
+    if (!colors.includes(fillColor)) {
+      colors.push(fillColor);
+    }
+  }
+  // Step 2: Clean color pickers other than the one from the parameter
+  $('.color-picker').not(currentPicker).remove();
+  // Step 3: Create absent pickers from the array of colors
+  colors.forEach(function(color) {
+    if (!$(`.color-picker[value="${color}"]`).length && (!currentPicker || currentPicker.val() !== color)) {
+      var pickerId = 'cp-' + color.replace(/[#]/g, ''); // Unique ID for the color picker
+      $('#color-line').append(`<input type="color" id="${pickerId}" class="color-picker" value="${color}">`);
+    }
+  });
+}
+
+// Function to create and display color pickers for SVG icons
+function createAndDisplayIconColorPickers(currentPicker) {
+  console.log('createAndDisplayIconColorPickers');
+    var colors = [];
+    $('#iconsContainer svg [fill]').each(function() {
+        var fillColor = $(this).attr('fill');
+        if (fillColor && !colors.includes(fillColor)) {
+            colors.push(fillColor);
+        }
+    });
+    
+    // Step 2: Clean color pickers other than the one from the parameter
+    $('.icon-color').not(currentPicker).remove();
+    
+    // Step 3: Create absent pickers from the array of colors
+    colors.forEach(function(color) {
+        if (!$(`.icon-color[value="${color}"]`).length && (!currentPicker || currentPicker.val() !== color)) {
+            var pickerId = 'cp-' + color.replace(/[#]/g, ''); // Unique ID for the color picker
+            $('#icon-colors').append(`<input type="color" id="${pickerId}" class="icon-color" value="${color}">`);
+        }
+    });
+}
+
+
+
+
+
+
   </script>
 </body>
 </html>
