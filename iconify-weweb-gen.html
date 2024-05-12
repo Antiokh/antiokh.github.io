@@ -499,7 +499,7 @@ function modifyCssTemplate(iconSetName, iconSetCss, iconList) {
 
       // Event handler for "Download CSS" button
       $('#downloadCss').click(function() {
-        const cssContent = $('#cssTextarea').val();
+        const cssContent = $('#cssTextarea').val().replace(/#/g, "%23");
         downloadContent(cssContent, 'weweb-iconify-' + iconSetName +'.css', 'css');
       });
 
