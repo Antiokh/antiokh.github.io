@@ -400,8 +400,8 @@
     <p id="yourlink" class="hidden noprint">Ваша ссылка на заполненную страницу:
       <input class="noprint hidden" style="width:300px" type="text" id="link">
     <p class="h2 noprint" id="dontshare">Не делитесь личной ссылкой, <b>делитесь ссылкой <a
-          title="Ссылка на страницу создания белого картона (данный сайт)" href="https://tinyurl.com/qr-uplatnica"
-          id="currentpage-static">https://tinyurl.com/qr-uplatnica</a>.</b> <a
+          title="Ссылка на страницу создания белого картона (данный сайт)" href="https://rslive.ru/uplatnica.html"
+          id="currentpage-static">https://rslive.ru/uplatnica.html</a>.</b> <a
         title="Документ со списком шифров для поля *шифра*."
         href="https://purs.gov.rs/sw4i/download/files/cms/attach?id=972">Шифры</a>.</p>
 
@@ -1069,7 +1069,7 @@ function shortenUrl(longUrl, callback) {
 var apiUrl = "https://tinyurl.com/api-create.php";
 
 // Construct the API request URL
-var requestUrl = apiUrl + "?url=" + encodeURIComponent(longUrl);
+var requestUrl = apiUrl + "?url=" + encodeURIComponent(longUrl.replace('antiokh.github.io','rslive.ru'));
 
 // Send a GET request to the API
 fetch(requestUrl)
