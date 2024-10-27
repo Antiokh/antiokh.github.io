@@ -262,7 +262,7 @@ select {
   <h2 class="h2 noprint">Форма не собирает персональных данных и не хранит их. Cookies не используются. Эта шапка не печатается.</h2>
   <p id="yourlink" class="hidden noprint">Ваша ссылка на заполненную страницу:
     <input class="noprint hidden" style="width:300px" type="text" id="link">
-	<p class="h2 noprint" id="dontshare">Не делитесь личной ссылкой, <b>делитесь ссылкой <a title="Ссылка на страницу создания белого картона (данный сайт)" href="https://tinyurl.com/beli-karton" id="currentpage-static">https://tinyurl.com/beli-karton</a>.</b> <a title="Сайт полиции с оригиналом образца белого картона и правилами регистрации пребывания." href="https://tinyurl.com/beli-karton-law">Сайт полиции</a>.</p>
+	<p class="h2 noprint" id="dontshare">Не делитесь личной ссылкой, <b>делитесь ссылкой <a title="Ссылка на страницу создания белого картона (данный сайт)" href="https://rslive.ru/beli-karton.html" id="currentpage-static">https://rslive.ru/beli-karton.html</a>.</b> <a title="Сайт полиции с оригиналом образца белого картона и правилами регистрации пребывания." href="https://tinyurl.com/beli-karton-law">Сайт полиции</a>.</p>
 
 </div>
 <div style="width:728px; margin: auto;">
@@ -648,7 +648,7 @@ function shortenUrl(longUrl, callback) {
   var apiUrl = "https://tinyurl.com/api-create.php";
 
   // Construct the API request URL
-  var requestUrl = apiUrl + "?url=" + encodeURIComponent(longUrl);
+  var requestUrl = apiUrl + "?url=" + encodeURIComponent(longUrl.replace('antiokh.github.io','rslive.ru'));
 
   // Send a GET request to the API
   fetch(requestUrl)
