@@ -917,6 +917,7 @@
             const navToggle = document.querySelector(".nav-toggle");
             const navMenu = document.querySelector(".nav-menu");
             const mobileCarouselQuery = window.matchMedia("(max-width: 640px)");
+            const tabletRevealQuery = window.matchMedia("(max-width: 900px)");
             const coarsePointerQuery = window.matchMedia("(pointer: coarse)");
             const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
             const marqueeLanes = Array.from(document.querySelectorAll(".case-lane, .testimonial-lane"));
@@ -1014,7 +1015,7 @@
             }
 
             const reduceMotion = reduceMotionQuery.matches;
-            const disableScrollReveal = reduceMotion || window.matchMedia("(max-width: 900px)").matches || coarsePointerQuery.matches;
+            const disableScrollReveal = reduceMotion || tabletRevealQuery.matches || coarsePointerQuery.matches;
 
             if ("IntersectionObserver" in window && !disableScrollReveal) {
                 document.body.classList.add("reveal-ready");
@@ -1312,38 +1313,13 @@
                     return;
                 }
 
-                if (!isMobileCarousel) {
-                    lane.dataset.loopReady = "";
-                    lane.dataset.loopMode = "";
-                    return;
-                }
+                if (lane._loopScrollBound !== true) {
+                    lane._loopScrollHandler = () => {
+                        if (!mobileCarouselQuery.matches || lane._loopAdjusting === true) {
+                            return;
+                        }
 
-                if (track.dataset.mobileLoopMode === "virtual") {
-                    const cards = Array.from(track.children);
-                    const middleSlot = Number.parseInt(track.dataset.mobileMiddleSlot || String(Math.floor(cards.length / 2)), 10);
-                    const middleCard = cards[middleSlot];
-
-                    if (!middleCard) {
-                        return;
-                    }
-
-                    lane.dataset.loopMode = "virtual";
-
-                    const centerOnMiddle = () => {
-                        lane.scrollLeft = middleCard.offsetLeft;
-                    };
-
-                    if (lane.dataset.loopReady !== "true") {
-                        centerOnMiddle();
-                        lane.dataset.loopReady = "true";
-                    }
-
-                    if (lane.dataset.loopBound !== "virtual") {
-                        lane.addEventListener("scroll", () => {
-                            if (lane._loopAdjusting === true) {
-                                return;
-                            }
-
+                        if (lane.dataset.loopMode === "virtual") {
                             if (lane._loopSettleTimer) {
                                 window.clearTimeout(lane._loopSettleTimer);
                             }
@@ -1399,9 +1375,58 @@
                                     lane._loopAdjusting = false;
                                 }, 40);
                             }, 110);
-                        }, { passive: true });
 
-                        lane.dataset.loopBound = "virtual";
+                            return;
+                        }
+
+                        if (lane.dataset.loopMode === "marquee") {
+                            const width = parseFloat(lane.dataset.loopWidth || "0");
+
+                            if (!width) {
+                                return;
+                            }
+
+                            if (lane.scrollLeft < width * 0.5) {
+                                lane.scrollLeft += width;
+                            } else if (lane.scrollLeft > width * 1.5) {
+                                lane.scrollLeft -= width;
+                            }
+                        }
+                    };
+
+                    lane.addEventListener("scroll", lane._loopScrollHandler, { passive: true });
+                    lane._loopScrollBound = true;
+                }
+
+                if (!isMobileCarousel) {
+                    if (lane._loopSettleTimer) {
+                        window.clearTimeout(lane._loopSettleTimer);
+                        lane._loopSettleTimer = null;
+                    }
+                    lane._loopAdjusting = false;
+                    lane.dataset.loopReady = "";
+                    lane.dataset.loopMode = "";
+                    return;
+                }
+
+                if (track.dataset.mobileLoopMode === "virtual") {
+                    const cards = Array.from(track.children);
+                    const middleSlot = Number.parseInt(track.dataset.mobileMiddleSlot || String(Math.floor(cards.length / 2)), 10);
+                    const middleCard = cards[middleSlot];
+
+                    if (!middleCard) {
+                        return;
+                    }
+
+                    lane.dataset.loopMode = "virtual";
+
+                    const centerOnMiddle = () => {
+                        lane.scrollLeft = middleCard.offsetLeft;
+                    };
+
+                    if (lane.dataset.loopReady !== "true") {
+                        centerOnMiddle();
+                        lane.dataset.loopReady = "true";
                     }
 
                     return;
@@ -1419,24 +1444,6 @@
                 if (lane.dataset.loopReady !== "true") {
                     lane.scrollLeft = loopWidth;
                     lane.dataset.loopReady = "true";
-                }
-
-                if (lane.dataset.loopBound !== "marquee") {
-                    lane.addEventListener("scroll", () => {
-                        const width = parseFloat(lane.dataset.loopWidth || "0");
-
-                        if (!width) {
-                            return;
-                        }
-
-                        if (lane.scrollLeft < width * 0.5) {
-                            lane.scrollLeft += width;
-                        } else if (lane.scrollLeft > width * 1.5) {
-                            lane.scrollLeft -= width;
-                        }
-                    }, { passive: true });
-
-                    lane.dataset.loopBound = "marquee";
                 }
             }
 
