@@ -1014,26 +1014,26 @@
 
                 const revealGroups = [
                     { selector: ".hero-copy", type: "heading", step: 0 },
-                    { selector: ".hero-visual", type: "hero-visual", step: 140 },
+                    { selector: ".hero-visual", type: "hero-visual", step: 60 },
                     { selector: ".section-heading", type: "heading", step: 0 },
-                    { selector: ".result-card", type: "card", step: 70 },
-                    { selector: ".comparison-card", type: "card", step: 90 },
-                    { selector: ".service-card", type: "card", step: 75 },
-                    { selector: ".insight-card", type: "card", step: 75 },
-                    { selector: ".value-card", type: "card", step: 75 },
-                    { selector: ".case-lane", type: "lane", step: 120 },
-                    { selector: ".process-step", type: "card", step: 85 },
-                    { selector: ".testimonial-lane", type: "lane", step: 120 },
+                    { selector: ".result-card", type: "card", step: 28 },
+                    { selector: ".comparison-card", type: "card", step: 34 },
+                    { selector: ".service-card", type: "card", step: 30 },
+                    { selector: ".insight-card", type: "card", step: 30 },
+                    { selector: ".value-card", type: "card", step: 30 },
+                    { selector: ".case-lane", type: "lane", step: 40 },
+                    { selector: ".process-step", type: "card", step: 32 },
+                    { selector: ".testimonial-lane", type: "lane", step: 40 },
                     { selector: ".founder-copy", type: "heading", step: 0 },
-                    { selector: ".founder-card", type: "card", step: 120 },
-                    { selector: ".faq-item", type: "card", step: 55 },
-                    { selector: ".booking-embed", type: "card", step: 120 }
+                    { selector: ".founder-card", type: "card", step: 40 },
+                    { selector: ".faq-item", type: "card", step: 24 },
+                    { selector: ".booking-embed", type: "card", step: 40 }
                 ];
 
                 revealGroups.forEach((group) => {
                     document.querySelectorAll(group.selector).forEach((node, index) => {
                         node.dataset.reveal = group.type;
-                        node.style.setProperty("--reveal-delay", Math.min(index * group.step, 320) + "ms");
+                        node.style.setProperty("--reveal-delay", Math.min(index * group.step, 120) + "ms");
                     });
                 });
 
