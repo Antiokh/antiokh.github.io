@@ -1,0 +1,36 @@
+# NeedleBit
+
+NeedleBit designs internal systems, MVPs, SaaS products, CRM, ERP, portals, and automation platforms for teams that outgrew spreadsheets, email, and fragile no-code setups.
+
+## Primary site
+- https://needlebit.dev/
+
+## What we do
+- Internal tools development
+- MVP delivery
+- SaaS product delivery
+- Business process automation
+- CRM / ERP implementation
+- No-code / low-code system architecture
+- Migration from Bubble / Glide / Airtable
+- Supabase / Xano backend architecture
+- n8n / Activepieces automation
+
+## Positioning
+- We offer more than development. We offer structure.
+- Low-code is not about speed alone. It is about control and maintainability.
+
+## Ideal clients
+- SMBs running on Google Sheets, email, and messengers
+- Founders who launched quickly and now cannot scale
+- Teams trapped in fragile or expensive no-code systems
+- Companies depending on one developer or one "system person"
+
+## Contact
+- hello@needlebit.systems
+- Belgrade, Serbia
+
+## Legal
+- Legal name: Anton Nazarov PR Veb Portali Beograd - Stari Grad
+- APR registration no.: 67121236
+- PIB: 113837189
