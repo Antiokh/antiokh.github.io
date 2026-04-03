@@ -920,6 +920,7 @@
             const coarsePointerQuery = window.matchMedia("(pointer: coarse)");
             const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
             const marqueeLanes = Array.from(document.querySelectorAll(".case-lane, .testimonial-lane"));
+            let desktopTickerFrame = 0;
             const summaryParts = {
                 frontend: {
                     WeWeb: "fast-to-ship web product delivery",
@@ -1147,6 +1148,9 @@
                 }
 
                 track.replaceChildren(fragment);
+                Array.from(track.children).forEach((card) => {
+                    card.dataset.loopStep = String(card.getBoundingClientRect().width + gap);
+                });
                 track.dataset.desktopGroupWidth = String(groupWidth + gap);
                 track.dataset.desktopStartOffset = String((groupWidth + gap) * centerGroupIndex);
                 track.style.removeProperty("--marquee-shift");
@@ -1187,6 +1191,7 @@
 
                 if (isMobileCarousel) {
                     lane.dataset.desktopTickerReady = "";
+                    lane._tickerVisible = false;
                     return;
                 }
 
@@ -1216,9 +1221,13 @@
                 }
 
                 track.style.transform = `translateX(${lane._tickerOffset || 0}px)`;
+                syncDesktopTickerLoop();
             }
 
             function runDesktopTickers(now) {
+                desktopTickerFrame = 0;
+                let hasActiveTicker = false;
+
                 marqueeLanes.forEach((lane) => {
                     if (lane.dataset.desktopTickerReady !== "true") {
                         return;
@@ -1227,11 +1236,12 @@
                     const isMobileCarousel = mobileCarouselQuery.matches;
                     const track = lane._tickerTrack || lane.querySelector(".case-track, .testimonial-track");
 
-                    if (!track || isMobileCarousel || document.hidden) {
+                    if (!track || isMobileCarousel || document.hidden || lane._tickerVisible !== true) {
                         lane._tickerLast = now;
                         return;
                     }
 
+                    hasActiveTicker = true;
                     const deltaSeconds = Math.min((now - (lane._tickerLast || now)) / 1000, 0.05);
                     lane._tickerLast = now;
 
@@ -1241,7 +1251,7 @@
                     if (lane._tickerDirection < 0) {
                         while (track.firstElementChild) {
                             const first = track.firstElementChild;
-                            const step = first.getBoundingClientRect().width + gap;
+                            const step = parseFloat(first.dataset.loopStep || "0") || (first.getBoundingClientRect().width + gap);
 
                             if (-lane._tickerOffset < step) {
                                 break;
@@ -1253,7 +1263,7 @@
                     } else {
                         while (track.lastElementChild) {
                             const last = track.lastElementChild;
-                            const step = last.getBoundingClientRect().width + gap;
+                            const step = parseFloat(last.dataset.loopStep || "0") || (last.getBoundingClientRect().width + gap);
 
                             if (lane._tickerOffset < step) {
                                 break;
@@ -1267,7 +1277,27 @@
                     track.style.transform = `translateX(${lane._tickerOffset}px)`;
                 });
 
-                window.requestAnimationFrame(runDesktopTickers);
+                if (hasActiveTicker) {
+                    desktopTickerFrame = window.requestAnimationFrame(runDesktopTickers);
+                }
+            }
+
+            function syncDesktopTickerLoop() {
+                const shouldRunTicker = !mobileCarouselQuery.matches
+                    && !document.hidden
+                    && marqueeLanes.some((lane) => lane.dataset.desktopTickerReady === "true" && lane._tickerVisible === true);
+
+                if (shouldRunTicker) {
+                    if (!desktopTickerFrame) {
+                        desktopTickerFrame = window.requestAnimationFrame(runDesktopTickers);
+                    }
+                    return;
+                }
+
+                if (desktopTickerFrame) {
+                    window.cancelAnimationFrame(desktopTickerFrame);
+                    desktopTickerFrame = 0;
+                }
             }
 
             function syncMobileLoopingLane(lane) {
@@ -1508,7 +1538,25 @@
                 setupMobileAutoAdvance(lane);
             });
 
-            window.requestAnimationFrame(runDesktopTickers);
+            if ("IntersectionObserver" in window) {
+                const tickerVisibilityObserver = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        entry.target._tickerVisible = entry.isIntersecting;
+                    });
+                    syncDesktopTickerLoop();
+                }, {
+                    threshold: 0.01
+                });
+
+                marqueeLanes.forEach((lane) => {
+                    tickerVisibilityObserver.observe(lane);
+                });
+            } else {
+                marqueeLanes.forEach((lane) => {
+                    lane._tickerVisible = true;
+                });
+                syncDesktopTickerLoop();
+            }
 
             let marqueeResizeFrame = null;
 
@@ -1524,9 +1572,14 @@
                         syncMobileLoopingLane(lane);
                         setupMobileAutoAdvance(lane);
                     });
+                    syncDesktopTickerLoop();
                     marqueeResizeFrame = null;
                 });
             }, { passive: true });
+
+            document.addEventListener("visibilitychange", () => {
+                syncDesktopTickerLoop();
+            });
 
             renderSystemSummary();
 
