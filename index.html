@@ -1172,7 +1172,7 @@
 
             function getDesktopTickerDuration(lane, track) {
                 if (track.classList.contains("testimonial-track")) {
-                    return lane.classList.contains("testimonial-lane-rtl") ? 12.925 : 11.675;
+                    return lane.classList.contains("testimonial-lane-rtl") ? 38.775 : 35.025;
                 }
 
                 return lane.classList.contains("case-lane-rtl") ? 120 : 106.65;
@@ -1236,8 +1236,9 @@
 
                     const isMobileCarousel = mobileCarouselQuery.matches;
                     const track = lane._tickerTrack || lane.querySelector(".case-track, .testimonial-track");
+                    const isHoverPaused = track?.classList.contains("testimonial-track") && lane.matches(":hover");
 
-                    if (!track || isMobileCarousel || document.hidden || lane._tickerVisible !== true) {
+                    if (!track || isMobileCarousel || document.hidden || lane._tickerVisible !== true || isHoverPaused) {
                         lane._tickerLast = now;
                         return;
                     }
@@ -1286,7 +1287,14 @@
             function syncDesktopTickerLoop() {
                 const shouldRunTicker = !mobileCarouselQuery.matches
                     && !document.hidden
-                    && marqueeLanes.some((lane) => lane.dataset.desktopTickerReady === "true" && lane._tickerVisible === true);
+                    && marqueeLanes.some((lane) => {
+                        if (lane.dataset.desktopTickerReady !== "true" || lane._tickerVisible !== true) {
+                            return false;
+                        }
+
+                        const track = lane._tickerTrack || lane.querySelector(".case-track, .testimonial-track");
+                        return !(track?.classList.contains("testimonial-track") && lane.matches(":hover"));
+                    });
 
                 if (shouldRunTicker) {
                     if (!desktopTickerFrame) {
@@ -1543,6 +1551,11 @@
                 setupDesktopTicker(lane);
                 syncMobileLoopingLane(lane);
                 setupMobileAutoAdvance(lane);
+
+                if (lane.classList.contains("testimonial-lane-ltr") || lane.classList.contains("testimonial-lane-rtl")) {
+                    lane.addEventListener("mouseenter", syncDesktopTickerLoop);
+                    lane.addEventListener("mouseleave", syncDesktopTickerLoop);
+                }
             });
 
             if ("IntersectionObserver" in window) {
