@@ -433,15 +433,8 @@ body.reveal-ready [data-reveal].is-visible {
     flex: 0 0 1.15em;
     width: 1.15em;
     height: 1.15em;
-    font-family: "Material Symbols Rounded";
-    font-size: 1.05em;
-    font-style: normal;
-    font-weight: 500;
+    color: currentColor;
     line-height: 1;
-    font-variation-settings: "FILL" 0, "wght" 500, "GRAD" 0, "opsz" 24;
-    letter-spacing: normal;
-    text-transform: none;
-    white-space: nowrap;
 }
 
 .nav-mobile-cta > span,
