@@ -1213,7 +1213,7 @@
                     const isMobileCarousel = window.matchMedia("(max-width: 640px)").matches;
                     const track = lane.querySelector(".case-track, .testimonial-track");
 
-                    if (!track || isMobileCarousel || document.hidden || lane.matches(":hover")) {
+                    if (!track || isMobileCarousel || document.hidden) {
                         lane._tickerLast = now;
                         return;
                     }

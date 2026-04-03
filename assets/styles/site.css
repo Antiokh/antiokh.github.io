@@ -1255,10 +1255,6 @@ body.reveal-ready [data-reveal].is-visible {
     animation: none;
 }
 
-.case-lane:hover .case-track {
-    animation-play-state: paused;
-}
-
 .case-card {
     width: min(420px, calc(100vw - 96px));
     min-height: 100%;
@@ -1343,10 +1339,6 @@ body.reveal-ready [data-reveal].is-visible {
 
 .testimonial-lane-rtl .testimonial-track {
     animation: none;
-}
-
-.testimonial-lane:hover .testimonial-track {
-    animation-play-state: paused;
 }
 
 .testimonial-card {
