@@ -907,7 +907,9 @@
     </script>
     <script>
 (function () {
-            const number = "381629795315";
+            const number = [51, 56, 49, 54, 50, 57, 55, 57, 53, 51, 49, 53]
+                .map((code) => String.fromCharCode(code))
+                .join("");
             const raw = "Hello NeedleBit, I'd like to discuss an internal system, MVP, SaaS, or automation project. Please share the next available slot.";
             const link = document.getElementById("whatsapp-link");
             const cursorGlow = document.querySelector(".cursor-glow");
