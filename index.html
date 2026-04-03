@@ -916,6 +916,10 @@
             const summaryNode = document.querySelector("[data-system-summary]");
             const navToggle = document.querySelector(".nav-toggle");
             const navMenu = document.querySelector(".nav-menu");
+            const mobileCarouselQuery = window.matchMedia("(max-width: 640px)");
+            const coarsePointerQuery = window.matchMedia("(pointer: coarse)");
+            const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+            const marqueeLanes = Array.from(document.querySelectorAll(".case-lane, .testimonial-lane"));
             const summaryParts = {
                 frontend: {
                     WeWeb: "fast-to-ship web product delivery",
@@ -981,7 +985,7 @@
                 });
             }
 
-            if (cursorGlow && window.matchMedia("(pointer: fine)").matches && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            if (cursorGlow && !coarsePointerQuery.matches && !reduceMotionQuery.matches) {
                 let rafId = null;
                 const point = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
 
@@ -1008,8 +1012,8 @@
                 });
             }
 
-            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-            const disableScrollReveal = reduceMotion || window.matchMedia("(max-width: 900px)").matches || window.matchMedia("(pointer: coarse)").matches;
+            const reduceMotion = reduceMotionQuery.matches;
+            const disableScrollReveal = reduceMotion || window.matchMedia("(max-width: 900px)").matches || coarsePointerQuery.matches;
 
             if ("IntersectionObserver" in window && !disableScrollReveal) {
                 document.body.classList.add("reveal-ready");
@@ -1074,7 +1078,11 @@
                 }
 
                 const sourceCards = track._sourceTemplates.map((card) => card.cloneNode(true));
-                const isMobileCarousel = window.matchMedia("(max-width: 640px)").matches;
+                const sourceWidths = Array.from(track.children)
+                    .filter((node) => node.getAttribute("aria-hidden") !== "true")
+                    .map((card) => card.getBoundingClientRect().width)
+                    .filter((width) => width > 0);
+                const isMobileCarousel = mobileCarouselQuery.matches;
 
                 if (!sourceCards.length) {
                     return;
@@ -1111,13 +1119,13 @@
                     return;
                 }
 
-                const groupWidth = sourceCards.reduce((total, card) => total + card.getBoundingClientRect().width, 0) + gap * Math.max(sourceCards.length - 1, 0);
+                const groupWidth = sourceWidths.reduce((total, width) => total + width, 0) + gap * Math.max(sourceWidths.length - 1, 0);
 
                 if (!groupWidth) {
                     return;
                 }
 
-                const averageCardWidth = sourceCards.reduce((total, card) => total + card.getBoundingClientRect().width, 0) / sourceCards.length;
+                const averageCardWidth = sourceWidths.reduce((total, width) => total + width, 0) / sourceWidths.length;
                 const visibleWidth = lane ? lane.clientWidth : window.innerWidth;
                 const cardsPerView = Math.max(1, Math.ceil(visibleWidth / Math.max(averageCardWidth + gap, 1)));
                 const groupsPerSide = Math.max(2, cardsPerView + 1);
@@ -1148,7 +1156,11 @@
             }
 
             function refreshMarquees() {
-                document.querySelectorAll(".case-track, .testimonial-track").forEach((track) => {
+                marqueeLanes.forEach((lane) => {
+                    const track = lane.querySelector(".case-track, .testimonial-track");
+                    if (!track) {
+                        return;
+                    }
                     buildMarqueeTrack(track);
                 });
             }
@@ -1166,7 +1178,7 @@
                     return;
                 }
 
-                const isMobileCarousel = window.matchMedia("(max-width: 640px)").matches;
+                const isMobileCarousel = mobileCarouselQuery.matches;
                 const track = lane.querySelector(".case-track, .testimonial-track");
 
                 if (!track) {
@@ -1194,6 +1206,8 @@
 
                 lane._tickerDirection = lane.classList.contains("case-lane-rtl") || lane.classList.contains("testimonial-lane-rtl") ? 1 : -1;
                 lane._tickerSpeed = totalWidth / duration;
+                lane._tickerTrack = track;
+                lane._tickerGap = gap;
 
                 if (lane.dataset.desktopTickerReady !== "true") {
                     lane._tickerOffset = -(parseFloat(track.dataset.desktopStartOffset || String(totalWidth)) || totalWidth);
@@ -1205,13 +1219,13 @@
             }
 
             function runDesktopTickers(now) {
-                document.querySelectorAll(".case-lane, .testimonial-lane").forEach((lane) => {
+                marqueeLanes.forEach((lane) => {
                     if (lane.dataset.desktopTickerReady !== "true") {
                         return;
                     }
 
-                    const isMobileCarousel = window.matchMedia("(max-width: 640px)").matches;
-                    const track = lane.querySelector(".case-track, .testimonial-track");
+                    const isMobileCarousel = mobileCarouselQuery.matches;
+                    const track = lane._tickerTrack || lane.querySelector(".case-track, .testimonial-track");
 
                     if (!track || isMobileCarousel || document.hidden) {
                         lane._tickerLast = now;
@@ -1221,7 +1235,7 @@
                     const deltaSeconds = Math.min((now - (lane._tickerLast || now)) / 1000, 0.05);
                     lane._tickerLast = now;
 
-                    const gap = parseFloat(window.getComputedStyle(track).gap || "0");
+                    const gap = lane._tickerGap || 0;
                     lane._tickerOffset = (lane._tickerOffset || 0) + lane._tickerDirection * lane._tickerSpeed * deltaSeconds;
 
                     if (lane._tickerDirection < 0) {
@@ -1261,7 +1275,7 @@
                     return;
                 }
 
-                const isMobileCarousel = window.matchMedia("(max-width: 640px)").matches;
+                const isMobileCarousel = mobileCarouselQuery.matches;
                 const track = lane.querySelector(".case-track, .testimonial-track");
 
                 if (!track) {
@@ -1401,8 +1415,8 @@
                     return;
                 }
 
-                const isMobileCarousel = window.matchMedia("(max-width: 640px)").matches;
-                const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                const isMobileCarousel = mobileCarouselQuery.matches;
+                const reduceMotion = reduceMotionQuery.matches;
 
                 if (!isMobileCarousel || reduceMotion) {
                     if (lane._autoAdvanceInterval) {
@@ -1488,7 +1502,7 @@
             }
 
             refreshMarquees();
-            document.querySelectorAll(".case-lane, .testimonial-lane").forEach((lane) => {
+            marqueeLanes.forEach((lane) => {
                 setupDesktopTicker(lane);
                 syncMobileLoopingLane(lane);
                 setupMobileAutoAdvance(lane);
@@ -1505,7 +1519,7 @@
 
                 marqueeResizeFrame = window.requestAnimationFrame(() => {
                     refreshMarquees();
-                    document.querySelectorAll(".case-lane, .testimonial-lane").forEach((lane) => {
+                    marqueeLanes.forEach((lane) => {
                         setupDesktopTicker(lane);
                         syncMobileLoopingLane(lane);
                         setupMobileAutoAdvance(lane);
