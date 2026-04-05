@@ -2,6 +2,31 @@
 
 Static marketing site for `https://needlebit.dev`.
 
+## Repo Boundary
+
+This repository is public-site only.
+
+Allowed here:
+
+- landing page source
+- public assets
+- SEO files
+- safe documentation about the public site
+
+Do not put here:
+
+- nginx configs
+- server rebuild guides
+- deployment host details
+- custom ports
+- usernames
+- keys
+- host fingerprints
+- panel notes
+- recovery notes for infrastructure
+
+All server-side and recovery material belongs in the separate private/local `c-server` workspace.
+
 ## Main Files
 
 - `index.html` - landing page
@@ -36,6 +61,7 @@ User preference for this repo:
 
 - always push after changes
 - do not leave finished local changes unpushed
+- do not publish infrastructure-sensitive material here
 
 ## Production Notes
 
