@@ -5,35 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
         if (window.location.hostname === "antiokh.github.io") {
-            (function () {
-                const targetOrigin = "https://needlebit.dev";
-                const probeUrl = targetOrigin + "/robots.txt?probe=" + Date.now();
-                const targetUrl = targetOrigin + window.location.pathname + window.location.search + window.location.hash;
-                const redirectIfReachable = async () => {
-                    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
-                    const timeoutId = window.setTimeout(() => {
-                        if (controller) {
-                            controller.abort();
-                        }
-                    }, 1500);
-
-                    try {
-                        await fetch(probeUrl, {
-                            method: "GET",
-                            mode: "no-cors",
-                            cache: "no-store",
-                            signal: controller ? controller.signal : undefined
-                        });
-                        window.location.replace(targetUrl);
-                    } catch (error) {
-                        // Keep GitHub Pages as fallback if the primary site is unavailable.
-                    } finally {
-                        window.clearTimeout(timeoutId);
-                    }
-                };
-
-                redirectIfReachable();
-            })();
+            window.location.replace("https://needlebit.dev" + window.location.pathname + window.location.search + window.location.hash);
         }
     </script>
     <title>NeedleBit | Internal Systems, MVPs, SaaS, and Automation</title>
