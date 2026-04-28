@@ -5241,7 +5241,7 @@ html:not(.dark) .VPImage.dark[data-v-8426fc1a] {
 
 .steps ol {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -5250,7 +5250,7 @@ html:not(.dark) .VPImage.dark[data-v-8426fc1a] {
 .steps li {
   position: relative;
   margin: 0;
-  padding: 0.25rem 0 0.25rem 3rem;
+  padding: 0 0 0.25rem 3rem;
 }
 
 .steps li::before {
@@ -5258,22 +5258,35 @@ html:not(.dark) .VPImage.dark[data-v-8426fc1a] {
   content: counter(step);
   position: absolute;
   left: 0;
-  top: 0.1rem;
+  top: 0;
   display: grid;
   place-items: center;
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 999px;
-  background: var(--vp-c-brand-1);
-  color: white;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-brand-1);
+  font-size: 0.9rem;
   font-weight: 700;
+  line-height: 1;
+}
+
+.steps li > :first-child {
+  margin-top: 0;
+}
+
+.steps li > :is(h2, h3, h4, h5, h6):first-child {
+  border: 0;
+  padding-top: 0;
+  line-height: 1.75rem;
 }
 
 .steps li::after {
   content: "";
   position: absolute;
   left: 0.86rem;
-  top: 2.1rem;
+  top: 2.15rem;
   bottom: -1rem;
   border-left: 1px solid var(--vp-c-divider);
 }
