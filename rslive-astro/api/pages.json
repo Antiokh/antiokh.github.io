@@ -144,6 +144,12 @@
     "url": "/rslive-astro/sr"
   },
   {
+    "id": "tools/steps",
+    "title": "Steps",
+    "description": "Тест пошагового компонента Starlight.",
+    "url": "/rslive-astro/tools/steps"
+  },
+  {
     "id": "tools/tables",
     "title": "Таблицы и API",
     "description": "Тест сортировки, фильтрации и загрузки данных из API.",
