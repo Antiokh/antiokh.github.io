@@ -6,6 +6,12 @@
     "url": "/rslive-astro/adaptation/cef"
   },
   {
+    "id": "adaptation/russians/count",
+    "title": "Демография диаспоры",
+    "description": "Тест визуализации статистики из DokuWiki achart.",
+    "url": "/rslive-astro/adaptation/russians/count"
+  },
+  {
     "id": "adaptation/srpski",
     "title": "Изучение сербского языка",
     "description": "Изучение сербского языка может быть увлекательным и доступным процессом благодаря разнообразным ресурсам и методам, которые помогут вам погрузиться в язык. В данной статье представ",
@@ -54,6 +60,12 @@
     "url": "/rslive-astro/edu/start"
   },
   {
+    "id": "en",
+    "title": "English test",
+    "description": "Minimal multilingual page.",
+    "url": "/rslive-astro/en"
+  },
+  {
     "id": "gov/taxes/codes",
     "title": "Платёжные коды квитанций",
     "description": "При оплате налогов физическими лицами квитанция (уплатница) должна содержать обязательные реквизиты: Имя плательщика** (уплатилац). Физические лица: Имя Фамилия, Город, Адрес регис",
@@ -62,7 +74,7 @@
   {
     "id": "graph",
     "title": "Схема миграции в Сербию",
-    "description": "%%#mermaid-1734101534046{font-family:'trebuchet ms',verdana,arial,sans-serif;font-size:16px;fill:#000000;}#mermaid-1734101534046 .error-icon{fill:#552222;}#mermaid-1734101534046 .e",
+    "description": "Тест Mermaid-графа.",
     "url": "/rslive-astro/graph"
   },
   {
@@ -124,6 +136,18 @@
     "title": "Визы и документы",
     "description": "Граждане России и Беларуси могут посещать Сербию без визы на срок до 30 дней в течение одного заезда. После этого есть возможность выехать из страны и снова въехать, чтобы 'обнулит",
     "url": "/rslive-astro/move/visa"
+  },
+  {
+    "id": "sr",
+    "title": "Srpski test",
+    "description": "Minimal multilingual page.",
+    "url": "/rslive-astro/sr"
+  },
+  {
+    "id": "tools/tables",
+    "title": "Таблицы и API",
+    "description": "Тест сортировки, фильтрации и загрузки данных из API.",
+    "url": "/rslive-astro/tools/tables"
   },
   {
     "id": "tools/uplatnica",
