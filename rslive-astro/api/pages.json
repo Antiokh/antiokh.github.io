@@ -156,6 +156,12 @@
     "url": "/rslive-astro/tools/tables"
   },
   {
+    "id": "tools/theme-switch",
+    "title": "Theme Switch",
+    "description": "Инструкция по использованию трёхпозиционного переключателя темы в Astro Starlight.",
+    "url": "/rslive-astro/tools/theme-switch"
+  },
+  {
     "id": "tools/uplatnica",
     "title": "Уплатница",
     "description": "Тестовый генератор сербской платёжки как встроенный Astro-компонент.",
